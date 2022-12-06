@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package shuffling;
+
+service Shuffling{
+  rpc Shuffle(ShuffleRequest) returns (ShuffleResponse) {}
+}
+
+message ShuffleRequest {
+  string input = 1;
+}
+
+message ShuffleResponse {
+  string output = 1;
+}

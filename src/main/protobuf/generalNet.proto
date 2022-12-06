@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package generalnet;
+
+service Generalnet {
+  rpc connect2Server (Connect2ServerRequest) returns (Connect2ServerResponse) {}
+}
+
+message Connect2ServerRequest {
+  string workerIpAddress = 1;
+}
+
+message Connect2ServerResponse {
+  int32 workerID = 1;
+  int32 workerNum = 3;
+  repeated string workerIPList = 2;
+}
