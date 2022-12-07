@@ -41,6 +41,7 @@ object worker {
         val serverWorkerID = client.startShufflingMsg2Master(i)
         /*println(serverWorkerID + "and" + client.myWorkerNum)*/
         if(i == client.myWorkerNum){
+          println(client.myWorkerNum + "is server")
           val workerserver = new WorkerServer(ExecutionContext.global,client.totalWorkerNum,workerPort+i,outputPath,client.myWorkerNum,inputDirectoryList(0))
           workerserver.start()
           //
@@ -48,16 +49,19 @@ object worker {
           while(check == 1){
             if(workerserver.isShutdown == 1){
               check = 0
+              println("Loop Out!")
             }
             /*else{
               Thread.sleep(10)
             }*/
           }
           workerserver.stop()
+          println(client.myWorkerNum + "server terminated")
           //util.copyOwnData(i,inputDirectoryList(0)+"toMachine."+ i.toString,outputPath) // shutdownWorkerServer에 녹일 수도 있을듯.
         }
         else{
-          Thread.sleep(1000)
+          Thread.sleep(100)
+          println(client.myWorkerNum + "is client")
           val client2client = new tempClient(client.workersIPList(i),workerPort + i,outputPath,client.myWorkerNum)
           /*serverWorkerID로 보낼 toMachine.i 파일 split*/
           var isSplitFinish = 0
@@ -75,7 +79,7 @@ object worker {
             client2client.Shuffle(content._1,isSplitFinish)
           }
           client2client.ShutdownWorkerServer()
-          
+          println(client.myWorkerNum + "client terminated")
         }
       }
       println("End of Shuffling")
