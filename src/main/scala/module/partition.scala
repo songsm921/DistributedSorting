@@ -31,7 +31,7 @@ class partition{
         i = i + 1
       }
     }
-    for (i <- 0 until rangeList.length) {
+    for (i <- 0 until instWriter.length) {
       instWriter(i).append(partitionedLines.filter(_._1 == i).map(_._2 + "\r\n").mkString)
     }
   }
