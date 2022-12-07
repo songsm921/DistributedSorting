@@ -56,7 +56,7 @@ object worker {
           //util.copyOwnData(i,inputDirectoryList(0)+"toMachine."+ i.toString,outputPath) // shutdownWorkerServer에 녹일 수도 있을듯.
         }
         else{
-          val client2client = new tempClient(client.workersIPList(i),workerPort,outputPath,client.myWorkerNum)
+          val client2client = new tempClient(client.workersIPList(i),workerPort + i,outputPath,client.myWorkerNum)
           /*serverWorkerID로 보낼 toMachine.i 파일 split*/
           var isSplitFinish = 0
           var startLines = 0
