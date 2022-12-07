@@ -68,6 +68,7 @@ object worker {
             else{
               startLines = content._2
             }
+
             client2client.Shuffle(content._1,isSplitFinish)
           }
           client2client.ShutdownWorkerServer()

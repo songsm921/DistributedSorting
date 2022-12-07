@@ -13,7 +13,7 @@ import java.io.PrintWriter
 class WorkerServer(executionContext: ExecutionContext, val numClient: Int, val Port: Int, val outputPath: String) extends Logging {
   self =>
   private[this] var server: Server = null
-  private val clientLatch: CountDownLatch = new CountDownLatch(numClient)
+  private val clientLatch: CountDownLatch = new CountDownLatch(numClient-1)
   private val workerIpList : ListBuffer[String] = ListBuffer[String]()
   private val printInstance : ListBuffer[PrintWriter] = ListBuffer[PrintWriter]()
   var isShutdown = 0
@@ -49,9 +49,12 @@ class WorkerServer(executionContext: ExecutionContext, val numClient: Int, val P
       for (ele <- request.datas){
         toFile.append(ele)
       }
+      println(toFile.length)
       val isTerminate = request.isSendFinish
       val workerID = request.fromWorkerID
+      println(workerID)
       for(line<- toFile){
+        println(line)
         printInstance(workerID).write(line + "\r\n")
       }
       val response = ShuffleResponse(sendTerminate = isTerminate)
