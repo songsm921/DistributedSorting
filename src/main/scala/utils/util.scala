@@ -4,6 +4,7 @@ import java.net.{DatagramSocket, InetAddress}
 import scala.collection.mutable.ListBuffer
 import scala.io.Source
 import java.io.File
+import java.io.PrintWriter
 object util {
   def getMyIpAddress: String = {
     val socket = new DatagramSocket
@@ -51,6 +52,15 @@ object util {
         (targetList,-1)
       }
 
+  }
+  def copyOwnData(workerID: Int ,path: String, outputPath: String) = {
+    val lines = Source.fromFile(path).getLines().toList
+    new PrintWriter(outputPath + "fromMachine." + workerID.toString) {
+      for (line <- lines) {
+        write(line + "\r\n")
+      }
+      close
+    }
   }
 }
 

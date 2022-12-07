@@ -53,6 +53,7 @@ object worker {
             }
           }
           workerserver.stop()
+          util.copyOwnData(i,inputDirectoryList(0)+"toMachine."+ i.toString,outputPath)
         }
         else{
           val client2client = new tempClient(client.workersIPList(i),workerPort,outputPath,client.myWorkerNum)
