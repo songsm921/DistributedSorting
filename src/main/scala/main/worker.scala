@@ -52,9 +52,9 @@ object worker {
               //println("Loop Out!")
             }
             //println("Loop Here!")
-            /*else{
+            else{
               Thread.sleep(10)
-            }*/
+            }
           }
           workerserver.stop()
           println(client.myWorkerNum + "server terminated")
