@@ -31,7 +31,7 @@ object util {
       val targetList = ListBuffer[String]()
       val lines = Source.fromFile(path).getLines().toList
       var isFinish = 0
-      val destLines = startLines + 40000
+      val destLines = startLines + 39999
       if(destLines >= lines.length){
         for(i <- startLines until lines.length){
           targetList.append(lines(i))
