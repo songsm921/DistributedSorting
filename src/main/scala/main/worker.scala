@@ -75,7 +75,7 @@ object worker {
             client2client.Shuffle(content._1,isSplitFinish)
           }
           client2client.ShutdownWorkerServer()
-          barrier = 0
+          
         }
       }
       println("End of Shuffling")
