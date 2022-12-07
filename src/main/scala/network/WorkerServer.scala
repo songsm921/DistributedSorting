@@ -50,14 +50,13 @@ class WorkerServer(executionContext: ExecutionContext, val numClient: Int, val P
         toFile.append(ele)
       }
       println(toFile.length)
-      val isTerminate = request.isSendFinish
       val workerID = request.fromWorkerID
       println(workerID)
       for(line<- toFile){
         println(line)
         printInstance(workerID).write(line + "\r\n")
       }
-      val response = ShuffleResponse(sendTerminate = isTerminate)
+      val response = ShuffleResponse(sendTerminate = 0)
       Future.successful(response)
     }
 
