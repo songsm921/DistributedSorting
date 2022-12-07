@@ -90,6 +90,7 @@ object worker {
         }
       }
       println("End of Shuffling")
+      utils.util.copyOwnData(client.myWorkerNum,inputDirectoryList(0)+"toMachine."+ client.myWorkerNum.toString,outputPath)
     }
     catch {
       case e: Exception => println("Exception: " + e)
