@@ -12,7 +12,6 @@ import scala.concurrent.ExecutionContext
 object worker {
   val workerPort = 18219
   def main(args: Array[String]): Unit = {
-    var barrier= 0
     val parameter = util.parseArguments(args)
     val masterIP = parameter._1
     val masterPort = parameter._2
@@ -44,7 +43,7 @@ object worker {
         if(i == client.myWorkerNum){
           val workerserver = new WorkerServer(ExecutionContext.global,client.totalWorkerNum,workerPort+i,outputPath,client.myWorkerNum,inputDirectoryList(0))
           workerserver.start()
-          barrier = 1
+          //
           var check = 1
           while(check == 1){
             if(workerserver.isShutdown == 1){
@@ -58,7 +57,7 @@ object worker {
           //util.copyOwnData(i,inputDirectoryList(0)+"toMachine."+ i.toString,outputPath) // shutdownWorkerServer에 녹일 수도 있을듯.
         }
         else{
-          while(barrier == 0){}
+          Thread.sleep(1000)
           val client2client = new tempClient(client.workersIPList(i),workerPort + i,outputPath,client.myWorkerNum)
           /*serverWorkerID로 보낼 toMachine.i 파일 split*/
           var isSplitFinish = 0
