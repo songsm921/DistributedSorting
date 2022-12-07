@@ -84,6 +84,7 @@ class MasterServer(executionContext: ExecutionContext, val numClient: Int, val P
        }
       }
       sampleLatch.await()
+      MasterServer.totalSampleList.sorted
       val rangeEachMachine : ListBuffer[(String,String)] = ListBuffer[(String,String)]()
       val firstRange = " " * 10
       val lastRange = "~" * 10
