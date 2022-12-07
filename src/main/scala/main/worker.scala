@@ -41,7 +41,7 @@ object worker {
         val serverWorkerID = client.startShufflingMsg2Master(i)
         /*println(serverWorkerID + "and" + client.myWorkerNum)*/
         if(i == client.myWorkerNum){
-          val workerserver = new WorkerServer(ExecutionContext.global,client.totalWorkerNum,workerPort,outputPath,client.myWorkerNum,inputDirectoryList(0))
+          val workerserver = new WorkerServer(ExecutionContext.global,client.totalWorkerNum,workerPort+i,outputPath,client.myWorkerNum,inputDirectoryList(0))
           workerserver.start()
           var check = 1
           while(check == 1){
