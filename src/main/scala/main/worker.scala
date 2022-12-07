@@ -91,6 +91,7 @@ object worker {
       }
       println("End of Shuffling")
       utils.util.copyOwnData(client.myWorkerNum,inputDirectoryList(0)+"toMachine."+ client.myWorkerNum.toString,outputPath)
+      /* Merge Sort Phase Implement */ // 12/08 04:34 AM
     }
     catch {
       case e: Exception => println("Exception: " + e)
