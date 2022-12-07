@@ -84,19 +84,19 @@ class MasterServer(executionContext: ExecutionContext, val numClient: Int, val P
        }
       }
       sampleLatch.await()
-      MasterServer.totalSampleList.sorted
+      val sortedSampleList = MasterServer.totalSampleList.sorted
       val rangeEachMachine : ListBuffer[(String,String)] = ListBuffer[(String,String)]()
       val firstRange = " " * 10
       val lastRange = "~" * 10
       for(i<-1 to numClient){
         if(i == 1){
-          rangeEachMachine.append((firstRange,MasterServer.totalSampleList((MasterServer.totalSampleList.length/numClient) * i - 1)))
+          rangeEachMachine.append((firstRange,sortedSampleList((sortedSampleList.length/numClient) * i - 1)))
         }
         else if(i == numClient){
           rangeEachMachine.append((rangeEachMachine(i-2)._2,lastRange))
         }
         else{
-          rangeEachMachine.append((rangeEachMachine(i-2)._2,MasterServer.totalSampleList((MasterServer.totalSampleList.length/numClient) * i - 1)))
+          rangeEachMachine.append((rangeEachMachine(i-2)._2,sortedSampleList((sortedSampleList.length/numClient) * i - 1)))
         }
       }
       for(range <- rangeEachMachine){
