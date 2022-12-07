@@ -26,8 +26,8 @@ class workerClient(host: String, port: Int, outputAbsoluteDir : String) extends 
     channel.shutdown().awaitTermination(5, TimeUnit.SECONDS)
   }
 
-  def addInputAbsolutePath(inputAbsolutePath : ListBuffer[String]) = {
-    inputAbsolutePath.appendAll(inputAbsolutePath)
+  def addInputAbsolutePath(Path : ListBuffer[String]) = {
+    inputAbsolutePath.appendAll(Path)
   }
 
   def connect2Server(): Unit = {
