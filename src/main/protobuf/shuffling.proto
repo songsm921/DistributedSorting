@@ -9,7 +9,6 @@ service Shuffling{
 
 message ShuffleRequest {
   repeated string datas = 1;
-  int32 isSendFinish = 2;
   int32 fromWorkerID = 3;
 }
 

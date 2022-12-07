@@ -35,7 +35,7 @@ class tempClient(host: String, port: Int, outputAbsoluteDir : String) extends Lo
 
 
   def Shuffle(data: ListBuffer[String],sendFinish: Int): Int = {
-    val request = ShuffleRequest(datas = data.toList,sendFinish,myWorkerNum)
+    val request = ShuffleRequest(datas = data.toList,myWorkerNum)
     try{
       val response = stub.shuffle(request)
       logger.info("Shuffle response: " + response)
