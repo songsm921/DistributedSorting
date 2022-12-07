@@ -23,6 +23,7 @@ class MasterServer(executionContext: ExecutionContext, val numClient: Int, val P
   private val sortLatch: CountDownLatch = new CountDownLatch(numClient)
   private val sampleLatch: CountDownLatch = new CountDownLatch(numClient)
   private val partitionLatch: CountDownLatch = new CountDownLatch(numClient)
+  private val shuffleLatch: ListBuffer[CountDownLatch] =  new ListBuffer[CountDownLatch]()
   private val workerIPList : ListBuffer[String] = ListBuffer[String]()
   def start() = {
     server = ServerBuilder.forPort(Port).addService(GeneralnetGrpc.bindService(new GeneralnetImpl, executionContext)).build.start
@@ -32,6 +33,9 @@ class MasterServer(executionContext: ExecutionContext, val numClient: Int, val P
       System.err.println("*** shutting down gRPC server since JVM is shutting down")
       self.stop()
       System.err.println("*** server shut down")
+    }
+    for(i<-0 until numClient){
+      shuffleLatch.append(new CountDownLatch(numClient))
     }
   }
 
@@ -110,10 +114,10 @@ class MasterServer(executionContext: ExecutionContext, val numClient: Int, val P
       Future.successful(response)
     }
     override def startShufflingMsg2Master(request: StartShufflingMsg2MasterRequest): Future[StartShufflingMsg2MasterResponse] = {
+      logger.info("Start Shuffling from Worker: " + request.workerID)
+      shuffleLatch(request.workerID).countDown()
+      shuffleLatch(request.workerID).await()
       val response = StartShufflingMsg2MasterResponse(nextServerWorkerID = MasterServer.nextShuffleServerID)
-      if(request.workerID == MasterServer.nextShuffleServerID){
-        MasterServer.nextShuffleServerID += 1
-      }
       Future.successful(response)
     }
   }

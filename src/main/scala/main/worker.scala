@@ -38,8 +38,9 @@ object worker {
       println("Let's start shuffling")
       /*Start Shuffling*/
       for(i <- 0 until client.totalWorkerNum){
-        val serverWorkerID = client.startShufflingMsg2Master()
-        if(serverWorkerID == client.myWorkerNum){
+        val serverWorkerID = client.startShufflingMsg2Master(i)
+        /*println(serverWorkerID + "and" + client.myWorkerNum)*/
+        if(i == client.myWorkerNum){
           val workerserver = new WorkerServer(ExecutionContext.global,client.totalWorkerNum,workerPort,outputPath)
           workerserver.start()
           var check = 1
@@ -54,12 +55,12 @@ object worker {
           workerserver.stop()
         }
         else{
-          val client2client = new tempClient(client.workersIPList(serverWorkerID),workerPort,outputPath)
+          val client2client = new tempClient(client.workersIPList(i),workerPort,outputPath)
           /*serverWorkerID로 보낼 toMachine.i 파일 split*/
           var isSplitFinish = 0
           var startLines = 0
           while(isSplitFinish == 0){
-            val content:(ListBuffer[String],Int) = util.splitFileper4MB(inputDirectoryList(0)+"toMachine."+serverWorkerID.toString,startLines)
+            val content:(ListBuffer[String],Int) = util.splitFileper4MB(inputDirectoryList(0)+"toMachine."+i.toString,startLines)
             if(content._2 == -1){
               isSplitFinish = 1
             }

@@ -127,8 +127,8 @@ class workerClient(host: String, port: Int, outputAbsoluteDir : String) extends 
       }
   }
 
-  def startShufflingMsg2Master(): Int = {
-    val request = StartShufflingMsg2MasterRequest(workerID = myWorkerNum)
+  def startShufflingMsg2Master(i: Int): Int = {
+    val request = StartShufflingMsg2MasterRequest(workerID = i)
     try{
       val response = stub.startShufflingMsg2Master(request)
       logger.info("startShufflingMsg2Master response: " + response)
