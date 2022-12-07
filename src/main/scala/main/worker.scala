@@ -46,12 +46,12 @@ object worker {
           workerserver.start()
           var check = 1
           while(check == 1){
-            println(workerserver.isShutdown)
+            //println(workerserver.isShutdown)
             if(workerserver.isShutdown == 1){
               check = 0
               println("Loop Out!")
             }
-            println("Loop Here!")
+            //println("Loop Here!")
             /*else{
               Thread.sleep(10)
             }*/

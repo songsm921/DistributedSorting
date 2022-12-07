@@ -68,11 +68,6 @@ class WorkerServer(executionContext: ExecutionContext, val numClient: Int, val P
       clientLatch.countDown()
     }
     clientLatch.await()
-    val ownDataPath = path + "toMachine." + workerServerID
-    val lines = Source.fromFile(ownDataPath).getLines().toList
-    for(line <- lines){
-      printInstance(workerServerID).write(line + "\r\n")
-    }
     printInstance(workerServerID).close
     isShutdown = 1
     val response = ShutdownWorkerServerResponse(shutdown = isShutdown)
