@@ -23,20 +23,19 @@ class partition{
     println("Access in " + path)
     val lines = Source.fromFile(path).getLines().map(_.splitAt(10)).toList
     val partitionedLines: ListBuffer[(Int, String)] = ListBuffer()
-    for(i<-0 until rangeList.length)
-    {
-      println(rangeList(i))
-    }
     for (line <- lines) {
-      var i = 0
-      while ((2*i) < rangeList.length) {
-        if (line._1 >= rangeList(2*i) && line._1 < rangeList(2*i + 1)) {
-          partitionedLines.append((i, line._1 + line._2))
+      var idx = 0
+      while ((2*idx) < rangeList.length) {
+        if (line._1 >= rangeList(2*idx) && line._1 < rangeList(2*idx + 1)) {
+          partitionedLines.append((idx, line._1 + line._2))
         }
-        i = i + 1
+        idx = idx + 1
       }
       if(line._1 == "~~~~~~~~~~"){
         partitionedLines.append((rangeList.length / 2 - 1, line._1 + line._2))
+      }
+      else{
+        val x = 1
       }
     }
     for (i <- 0 until instWriter.length) {
