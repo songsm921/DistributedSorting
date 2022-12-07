@@ -102,9 +102,9 @@ class workerClient(host: String, port: Int, outputAbsoluteDir : String) extends 
     }
   }
 
-  def startPartitioning(): Unit = {
+  def startPartitioning(firstInputPath : String): Unit = {
     val partitionInstance = new partition()
-    partitionInstance.createWriterForTest(totalWorkerNum)
+    partitionInstance.createWriterForTest(totalWorkerNum,firstInputPath)
     for(path <- inputAbsolutePath){
       partitionInstance.partitionEachLine(path, partitionRanges)
     }

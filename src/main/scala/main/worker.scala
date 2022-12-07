@@ -32,7 +32,7 @@ object worker {
       client.startSampling()
       client.samplingEndMsg2Master()
 
-      client.startPartitioning()
+      client.startPartitioning(inputDirectoryList(0))
       client.partitioningEndMsg2Master()
       println("Let's start shuffling")
       /*Start Shuffling*/

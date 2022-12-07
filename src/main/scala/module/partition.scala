@@ -7,9 +7,9 @@ import scala.io.Source
 class partition{
   private val instWriter = ListBuffer[PrintWriter]()
 
-  def createWriterForTest(numWorker: Int) = {
+  def createWriterForTest(numWorker: Int,tempFilePath: String) = {
     for (i<-0 until numWorker){
-      instWriter.append(new PrintWriter("toMachine." + i.toString))
+      instWriter.append(new PrintWriter(tempFilePath +"toMachine." + i.toString))
     }
   }
 
