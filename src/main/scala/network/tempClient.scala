@@ -19,12 +19,11 @@ import generalnet.generalNet.{GeneralnetGrpc,Connect2ServerRequest,Connect2Serve
 import shuffling.shuffling.{ShufflingGrpc,ShuffleRequest,ShuffleResponse,ShutdownWorkerServerRequest,ShutdownWorkerServerResponse}
 import module.{sort,sample,partition}
 
-class tempClient(host: String, port: Int, outputAbsoluteDir : String) extends Logging {
+class tempClient(host: String, port: Int, outputAbsoluteDir : String, myWorkerNum : Int) extends Logging {
   val channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().asInstanceOf[ManagedChannelBuilder[_]].build
   val stub = ShufflingGrpc.blockingStub(channel)
   val inputAbsolutePath = ListBuffer[String]()
   var totalWorkerNum = -1
-  var myWorkerNum = -1
   val workersIPList = ListBuffer[String]()
   var samplesList2Master = ListBuffer[String]()
   var partitionRanges = Array[String]()

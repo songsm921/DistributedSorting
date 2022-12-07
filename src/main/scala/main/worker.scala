@@ -55,7 +55,7 @@ object worker {
           workerserver.stop()
         }
         else{
-          val client2client = new tempClient(client.workersIPList(i),workerPort,outputPath)
+          val client2client = new tempClient(client.workersIPList(i),workerPort,outputPath,client.myWorkerNum)
           /*serverWorkerID로 보낼 toMachine.i 파일 split*/
           var isSplitFinish = 0
           var startLines = 0

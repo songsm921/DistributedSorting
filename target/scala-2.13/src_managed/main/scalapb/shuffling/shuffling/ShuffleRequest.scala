@@ -8,7 +8,6 @@ package shuffling.shuffling
 @SerialVersionUID(0L)
 final case class ShuffleRequest(
     datas: _root_.scala.Seq[_root_.scala.Predef.String] = _root_.scala.Seq.empty,
-    isSendFinish: _root_.scala.Int = 0,
     fromWorkerID: _root_.scala.Int = 0,
     unknownFields: _root_.scalapb.UnknownFieldSet = _root_.scalapb.UnknownFieldSet.empty
     ) extends scalapb.GeneratedMessage with scalapb.lenses.Updatable[ShuffleRequest] {
@@ -20,13 +19,6 @@ final case class ShuffleRequest(
         val __value = __item
         __size += _root_.com.google.protobuf.CodedOutputStream.computeStringSize(1, __value)
       }
-      
-      {
-        val __value = isSendFinish
-        if (__value != 0) {
-          __size += _root_.com.google.protobuf.CodedOutputStream.computeInt32Size(2, __value)
-        }
-      };
       
       {
         val __value = fromWorkerID
@@ -52,12 +44,6 @@ final case class ShuffleRequest(
         _output__.writeString(1, __m)
       };
       {
-        val __v = isSendFinish
-        if (__v != 0) {
-          _output__.writeInt32(2, __v)
-        }
-      };
-      {
         val __v = fromWorkerID
         if (__v != 0) {
           _output__.writeInt32(3, __v)
@@ -69,17 +55,12 @@ final case class ShuffleRequest(
     def addDatas(__vs: _root_.scala.Predef.String *): ShuffleRequest = addAllDatas(__vs)
     def addAllDatas(__vs: Iterable[_root_.scala.Predef.String]): ShuffleRequest = copy(datas = datas ++ __vs)
     def withDatas(__v: _root_.scala.Seq[_root_.scala.Predef.String]): ShuffleRequest = copy(datas = __v)
-    def withIsSendFinish(__v: _root_.scala.Int): ShuffleRequest = copy(isSendFinish = __v)
     def withFromWorkerID(__v: _root_.scala.Int): ShuffleRequest = copy(fromWorkerID = __v)
     def withUnknownFields(__v: _root_.scalapb.UnknownFieldSet) = copy(unknownFields = __v)
     def discardUnknownFields = copy(unknownFields = _root_.scalapb.UnknownFieldSet.empty)
     def getFieldByNumber(__fieldNumber: _root_.scala.Int): _root_.scala.Any = {
       (__fieldNumber: @_root_.scala.unchecked) match {
         case 1 => datas
-        case 2 => {
-          val __t = isSendFinish
-          if (__t != 0) __t else null
-        }
         case 3 => {
           val __t = fromWorkerID
           if (__t != 0) __t else null
@@ -90,7 +71,6 @@ final case class ShuffleRequest(
       _root_.scala.Predef.require(__field.containingMessage eq companion.scalaDescriptor)
       (__field.number: @_root_.scala.unchecked) match {
         case 1 => _root_.scalapb.descriptors.PRepeated(datas.iterator.map(_root_.scalapb.descriptors.PString(_)).toVector)
-        case 2 => _root_.scalapb.descriptors.PInt(isSendFinish)
         case 3 => _root_.scalapb.descriptors.PInt(fromWorkerID)
       }
     }
@@ -103,7 +83,6 @@ object ShuffleRequest extends scalapb.GeneratedMessageCompanion[shuffling.shuffl
   implicit def messageCompanion: scalapb.GeneratedMessageCompanion[shuffling.shuffling.ShuffleRequest] = this
   def parseFrom(`_input__`: _root_.com.google.protobuf.CodedInputStream): shuffling.shuffling.ShuffleRequest = {
     val __datas: _root_.scala.collection.immutable.VectorBuilder[_root_.scala.Predef.String] = new _root_.scala.collection.immutable.VectorBuilder[_root_.scala.Predef.String]
-    var __isSendFinish: _root_.scala.Int = 0
     var __fromWorkerID: _root_.scala.Int = 0
     var `_unknownFields__`: _root_.scalapb.UnknownFieldSet.Builder = null
     var _done__ = false
@@ -113,8 +92,6 @@ object ShuffleRequest extends scalapb.GeneratedMessageCompanion[shuffling.shuffl
         case 0 => _done__ = true
         case 10 =>
           __datas += _input__.readStringRequireUtf8()
-        case 16 =>
-          __isSendFinish = _input__.readInt32()
         case 24 =>
           __fromWorkerID = _input__.readInt32()
         case tag =>
@@ -126,7 +103,6 @@ object ShuffleRequest extends scalapb.GeneratedMessageCompanion[shuffling.shuffl
     }
     shuffling.shuffling.ShuffleRequest(
         datas = __datas.result(),
-        isSendFinish = __isSendFinish,
         fromWorkerID = __fromWorkerID,
         unknownFields = if (_unknownFields__ == null) _root_.scalapb.UnknownFieldSet.empty else _unknownFields__.result()
     )
@@ -136,7 +112,6 @@ object ShuffleRequest extends scalapb.GeneratedMessageCompanion[shuffling.shuffl
       _root_.scala.Predef.require(__fieldsMap.keys.forall(_.containingMessage eq scalaDescriptor), "FieldDescriptor does not match message type.")
       shuffling.shuffling.ShuffleRequest(
         datas = __fieldsMap.get(scalaDescriptor.findFieldByNumber(1).get).map(_.as[_root_.scala.Seq[_root_.scala.Predef.String]]).getOrElse(_root_.scala.Seq.empty),
-        isSendFinish = __fieldsMap.get(scalaDescriptor.findFieldByNumber(2).get).map(_.as[_root_.scala.Int]).getOrElse(0),
         fromWorkerID = __fieldsMap.get(scalaDescriptor.findFieldByNumber(3).get).map(_.as[_root_.scala.Int]).getOrElse(0)
       )
     case _ => throw new RuntimeException("Expected PMessage")
@@ -148,24 +123,19 @@ object ShuffleRequest extends scalapb.GeneratedMessageCompanion[shuffling.shuffl
   def enumCompanionForFieldNumber(__fieldNumber: _root_.scala.Int): _root_.scalapb.GeneratedEnumCompanion[_] = throw new MatchError(__fieldNumber)
   lazy val defaultInstance = shuffling.shuffling.ShuffleRequest(
     datas = _root_.scala.Seq.empty,
-    isSendFinish = 0,
     fromWorkerID = 0
   )
   implicit class ShuffleRequestLens[UpperPB](_l: _root_.scalapb.lenses.Lens[UpperPB, shuffling.shuffling.ShuffleRequest]) extends _root_.scalapb.lenses.ObjectLens[UpperPB, shuffling.shuffling.ShuffleRequest](_l) {
     def datas: _root_.scalapb.lenses.Lens[UpperPB, _root_.scala.Seq[_root_.scala.Predef.String]] = field(_.datas)((c_, f_) => c_.copy(datas = f_))
-    def isSendFinish: _root_.scalapb.lenses.Lens[UpperPB, _root_.scala.Int] = field(_.isSendFinish)((c_, f_) => c_.copy(isSendFinish = f_))
     def fromWorkerID: _root_.scalapb.lenses.Lens[UpperPB, _root_.scala.Int] = field(_.fromWorkerID)((c_, f_) => c_.copy(fromWorkerID = f_))
   }
   final val DATAS_FIELD_NUMBER = 1
-  final val ISSENDFINISH_FIELD_NUMBER = 2
   final val FROMWORKERID_FIELD_NUMBER = 3
   def of(
     datas: _root_.scala.Seq[_root_.scala.Predef.String],
-    isSendFinish: _root_.scala.Int,
     fromWorkerID: _root_.scala.Int
   ): _root_.shuffling.shuffling.ShuffleRequest = _root_.shuffling.shuffling.ShuffleRequest(
     datas,
-    isSendFinish,
     fromWorkerID
   )
   // @@protoc_insertion_point(GeneratedMessageCompanion[shuffling.ShuffleRequest])
