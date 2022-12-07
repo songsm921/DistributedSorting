@@ -7,7 +7,7 @@ package shuffling.shuffling
 
 @SerialVersionUID(0L)
 final case class ShuffleResponse(
-    output: _root_.scala.Predef.String = "",
+    sendTerminate: _root_.scala.Int = 0,
     unknownFields: _root_.scalapb.UnknownFieldSet = _root_.scalapb.UnknownFieldSet.empty
     ) extends scalapb.GeneratedMessage with scalapb.lenses.Updatable[ShuffleResponse] {
     @transient
@@ -16,9 +16,9 @@ final case class ShuffleResponse(
       var __size = 0
       
       {
-        val __value = output
-        if (!__value.isEmpty) {
-          __size += _root_.com.google.protobuf.CodedOutputStream.computeStringSize(1, __value)
+        val __value = sendTerminate
+        if (__value != 0) {
+          __size += _root_.com.google.protobuf.CodedOutputStream.computeInt32Size(1, __value)
         }
       };
       __size += unknownFields.serializedSize
@@ -35,28 +35,28 @@ final case class ShuffleResponse(
     }
     def writeTo(`_output__`: _root_.com.google.protobuf.CodedOutputStream): _root_.scala.Unit = {
       {
-        val __v = output
-        if (!__v.isEmpty) {
-          _output__.writeString(1, __v)
+        val __v = sendTerminate
+        if (__v != 0) {
+          _output__.writeInt32(1, __v)
         }
       };
       unknownFields.writeTo(_output__)
     }
-    def withOutput(__v: _root_.scala.Predef.String): ShuffleResponse = copy(output = __v)
+    def withSendTerminate(__v: _root_.scala.Int): ShuffleResponse = copy(sendTerminate = __v)
     def withUnknownFields(__v: _root_.scalapb.UnknownFieldSet) = copy(unknownFields = __v)
     def discardUnknownFields = copy(unknownFields = _root_.scalapb.UnknownFieldSet.empty)
     def getFieldByNumber(__fieldNumber: _root_.scala.Int): _root_.scala.Any = {
       (__fieldNumber: @_root_.scala.unchecked) match {
         case 1 => {
-          val __t = output
-          if (__t != "") __t else null
+          val __t = sendTerminate
+          if (__t != 0) __t else null
         }
       }
     }
     def getField(__field: _root_.scalapb.descriptors.FieldDescriptor): _root_.scalapb.descriptors.PValue = {
       _root_.scala.Predef.require(__field.containingMessage eq companion.scalaDescriptor)
       (__field.number: @_root_.scala.unchecked) match {
-        case 1 => _root_.scalapb.descriptors.PString(output)
+        case 1 => _root_.scalapb.descriptors.PInt(sendTerminate)
       }
     }
     def toProtoString: _root_.scala.Predef.String = _root_.scalapb.TextFormat.printToUnicodeString(this)
@@ -67,15 +67,15 @@ final case class ShuffleResponse(
 object ShuffleResponse extends scalapb.GeneratedMessageCompanion[shuffling.shuffling.ShuffleResponse] {
   implicit def messageCompanion: scalapb.GeneratedMessageCompanion[shuffling.shuffling.ShuffleResponse] = this
   def parseFrom(`_input__`: _root_.com.google.protobuf.CodedInputStream): shuffling.shuffling.ShuffleResponse = {
-    var __output: _root_.scala.Predef.String = ""
+    var __sendTerminate: _root_.scala.Int = 0
     var `_unknownFields__`: _root_.scalapb.UnknownFieldSet.Builder = null
     var _done__ = false
     while (!_done__) {
       val _tag__ = _input__.readTag()
       _tag__ match {
         case 0 => _done__ = true
-        case 10 =>
-          __output = _input__.readStringRequireUtf8()
+        case 8 =>
+          __sendTerminate = _input__.readInt32()
         case tag =>
           if (_unknownFields__ == null) {
             _unknownFields__ = new _root_.scalapb.UnknownFieldSet.Builder()
@@ -84,7 +84,7 @@ object ShuffleResponse extends scalapb.GeneratedMessageCompanion[shuffling.shuff
       }
     }
     shuffling.shuffling.ShuffleResponse(
-        output = __output,
+        sendTerminate = __sendTerminate,
         unknownFields = if (_unknownFields__ == null) _root_.scalapb.UnknownFieldSet.empty else _unknownFields__.result()
     )
   }
@@ -92,7 +92,7 @@ object ShuffleResponse extends scalapb.GeneratedMessageCompanion[shuffling.shuff
     case _root_.scalapb.descriptors.PMessage(__fieldsMap) =>
       _root_.scala.Predef.require(__fieldsMap.keys.forall(_.containingMessage eq scalaDescriptor), "FieldDescriptor does not match message type.")
       shuffling.shuffling.ShuffleResponse(
-        output = __fieldsMap.get(scalaDescriptor.findFieldByNumber(1).get).map(_.as[_root_.scala.Predef.String]).getOrElse("")
+        sendTerminate = __fieldsMap.get(scalaDescriptor.findFieldByNumber(1).get).map(_.as[_root_.scala.Int]).getOrElse(0)
       )
     case _ => throw new RuntimeException("Expected PMessage")
   }
@@ -102,16 +102,16 @@ object ShuffleResponse extends scalapb.GeneratedMessageCompanion[shuffling.shuff
   lazy val nestedMessagesCompanions: Seq[_root_.scalapb.GeneratedMessageCompanion[_ <: _root_.scalapb.GeneratedMessage]] = Seq.empty
   def enumCompanionForFieldNumber(__fieldNumber: _root_.scala.Int): _root_.scalapb.GeneratedEnumCompanion[_] = throw new MatchError(__fieldNumber)
   lazy val defaultInstance = shuffling.shuffling.ShuffleResponse(
-    output = ""
+    sendTerminate = 0
   )
   implicit class ShuffleResponseLens[UpperPB](_l: _root_.scalapb.lenses.Lens[UpperPB, shuffling.shuffling.ShuffleResponse]) extends _root_.scalapb.lenses.ObjectLens[UpperPB, shuffling.shuffling.ShuffleResponse](_l) {
-    def output: _root_.scalapb.lenses.Lens[UpperPB, _root_.scala.Predef.String] = field(_.output)((c_, f_) => c_.copy(output = f_))
+    def sendTerminate: _root_.scalapb.lenses.Lens[UpperPB, _root_.scala.Int] = field(_.sendTerminate)((c_, f_) => c_.copy(sendTerminate = f_))
   }
-  final val OUTPUT_FIELD_NUMBER = 1
+  final val SENDTERMINATE_FIELD_NUMBER = 1
   def of(
-    output: _root_.scala.Predef.String
+    sendTerminate: _root_.scala.Int
   ): _root_.shuffling.shuffling.ShuffleResponse = _root_.shuffling.shuffling.ShuffleResponse(
-    output
+    sendTerminate
   )
   // @@protoc_insertion_point(GeneratedMessageCompanion[shuffling.ShuffleResponse])
 }

@@ -8,10 +8,12 @@ import io.grpc.{Server, ServerBuilder}
 import utils.util.getMyIpAddress
 import scala.collection.mutable.ListBuffer
 import generalnet.generalNet.{Connect2ServerRequest, Connect2ServerResponse,SortEndMsg2MasterRequest,SortEndMsg2MasterResponse, GeneralnetGrpc,
-  SamplingEndMsg2MasterRequest, SamplingEndMsg2MasterResponse, PartitioningEndMsg2MasterRequest, PartitioningEndMsg2MasterResponse}
+  SamplingEndMsg2MasterRequest, SamplingEndMsg2MasterResponse, PartitioningEndMsg2MasterRequest, PartitioningEndMsg2MasterResponse,
+  StartShufflingMsg2MasterRequest,StartShufflingMsg2MasterResponse}
 
 object MasterServer{
   var numFinishGetSamples = 0
+  var nextShuffleServerID = 0
   val totalSampleList = ListBuffer[String]()
 }
 class MasterServer(executionContext: ExecutionContext, val numClient: Int, val Port: Int) extends Logging {
@@ -105,6 +107,13 @@ class MasterServer(executionContext: ExecutionContext, val numClient: Int, val P
       partitionLatch.countDown()
       partitionLatch.await()
       val response = PartitioningEndMsg2MasterResponse(startNext = 1)
+      Future.successful(response)
+    }
+    override def startShufflingMsg2Master(request: StartShufflingMsg2MasterRequest): Future[StartShufflingMsg2MasterResponse] = {
+      val response = StartShufflingMsg2MasterResponse(nextServerWorkerID = MasterServer.nextShuffleServerID)
+      if(request.workerID == MasterServer.nextShuffleServerID){
+        MasterServer.nextShuffleServerID += 1
+      }
       Future.successful(response)
     }
   }

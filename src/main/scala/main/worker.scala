@@ -2,11 +2,12 @@ package main
 import utils.{Phase, util, workerPhase}
 import network.workerClient
 import network.MasterServer
+import network.WorkerServer
+import network.tempClient
 
 import java.io._
 import scala.collection.mutable.ListBuffer
 import scala.concurrent.ExecutionContext
-
 
 object worker {
   val workerPort = 18219
@@ -36,7 +37,42 @@ object worker {
       client.partitioningEndMsg2Master()
       println("Let's start shuffling")
       /*Start Shuffling*/
+      for(i <- 0 until client.totalWorkerNum){
+        val serverWorkerID = client.startShufflingMsg2Master()
+        if(serverWorkerID == client.myWorkerNum){
+          val workerserver = new WorkerServer(ExecutionContext.global,client.totalWorkerNum,workerPort,outputPath)
+          workerserver.start()
+          var check = 1
+          while(check == 1){
+            if(workerserver.isShutdown == 1){
+              check = 0
+            }
+            else{
+              Thread.sleep(10)
+            }
+          }
+          workerserver.stop()
+        }
+        else{
+          val client2client = new tempClient(client.workersIPList(serverWorkerID),workerPort,outputPath)
+          /*serverWorkerID로 보낼 toMachine.i 파일 split*/
+          var isSplitFinish = 0
+          var startLines = 0
+          while(isSplitFinish == 0){
+            val content:(ListBuffer[String],Int) = util.splitFileper4MB(inputDirectoryList(0)+"toMachine."+serverWorkerID.toString,startLines)
+            if(content._2 == -1){
+              isSplitFinish = 1
+            }
 
+            else{
+              startLines = content._2
+            }
+            client2client.Shuffle(content._1,isSplitFinish)
+          }
+          client2client.ShutdownWorkerServer()
+        }
+      }
+      println("End of Shuffling")
     }
     catch {
       case e: Exception => println("Exception: " + e)

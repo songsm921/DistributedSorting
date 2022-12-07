@@ -1,0 +1,13 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(compile, None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Compile / compile[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0minfo[0m] [0m[0mCompiling 2 protobuf files to /Users/suminsong/Desktop/DistributedSorting/target/scala-2.13/src_managed/main/scalapb[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 29 Scala sources to /Users/suminsong/Desktop/DistributedSorting/target/scala-2.13/classes ...[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/suminsong/Desktop/DistributedSorting/src/main/scala/network/WorkerServer.scala:68:60: unknown parameter name: isShutdown[0m
+[0m[[0m[31merror[0m] [0m[0m    val response = ShutdownWorkerServerResponse(isShutdown = isShutdown)[0m
+[0m[[0m[31merror[0m] [0m[0m                                                           ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[0mdebug[0m] [0m[0mForcing garbage collection...[0m
+[0m[[0m[31merror[0m] [0m[0m(Compile / [31mcompileIncremental[0m) Compilation failed[0m
+[0m[[0m[31merror[0m] [0m[0mTotal time: 1 s, completed 2022. 12. 7. 오후 9:30:04[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(idea-shell, None, None)[0m

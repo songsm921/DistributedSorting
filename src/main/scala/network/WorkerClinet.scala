@@ -13,7 +13,9 @@ import java.util.concurrent.TimeUnit
 import scala.concurrent.{Future, Promise}
 import utils.{util, Phase, workerPhase}
 import generalnet.generalNet.{GeneralnetGrpc,Connect2ServerRequest,Connect2ServerResponse,SortEndMsg2MasterRequest,SortEndMsg2MasterResponse,
-  SamplingEndMsg2MasterRequest, SamplingEndMsg2MasterResponse, PartitioningEndMsg2MasterRequest, PartitioningEndMsg2MasterResponse}
+  SamplingEndMsg2MasterRequest, SamplingEndMsg2MasterResponse, PartitioningEndMsg2MasterRequest, PartitioningEndMsg2MasterResponse,
+  StartShufflingMsg2MasterRequest,StartShufflingMsg2MasterResponse}
+import shuffling.shuffling.{ShufflingGrpc,ShuffleRequest,ShuffleResponse,ShutdownWorkerServerRequest,ShutdownWorkerServerResponse}
 import module.{sort,sample,partition}
 
 class workerClient(host: String, port: Int, outputAbsoluteDir : String) extends Logging {
@@ -124,4 +126,21 @@ class workerClient(host: String, port: Int, outputAbsoluteDir : String) extends 
           return
       }
   }
+
+  def startShufflingMsg2Master(): Int = {
+    val request = StartShufflingMsg2MasterRequest(workerID = myWorkerNum)
+    try{
+      val response = stub.startShufflingMsg2Master(request)
+      logger.info("startShufflingMsg2Master response: " + response)
+      response.nextServerWorkerID
+    }
+    catch
+      {
+        case e: StatusRuntimeException =>
+          logger.warn(s"RPC failed: ${e.getStatus}")
+          -1
+      }
+  }
+
+
 }

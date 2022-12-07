@@ -10,14 +10,21 @@ object ShufflingProto extends _root_.scalapb.GeneratedFileObject {
   lazy val messagesCompanions: Seq[_root_.scalapb.GeneratedMessageCompanion[_ <: _root_.scalapb.GeneratedMessage]] =
     Seq[_root_.scalapb.GeneratedMessageCompanion[_ <: _root_.scalapb.GeneratedMessage]](
       shuffling.shuffling.ShuffleRequest,
-      shuffling.shuffling.ShuffleResponse
+      shuffling.shuffling.ShuffleResponse,
+      shuffling.shuffling.ShutdownWorkerServerRequest,
+      shuffling.shuffling.ShutdownWorkerServerResponse
     )
   private lazy val ProtoBytes: _root_.scala.Array[Byte] =
       scalapb.Encoding.fromBase64(scala.collection.immutable.Seq(
-  """Cg9zaHVmZmxpbmcucHJvdG8SCXNodWZmbGluZyIyCg5TaHVmZmxlUmVxdWVzdBIgCgVpbnB1dBgBIAEoCUIK4j8HEgVpbnB1d
-  FIFaW5wdXQiNgoPU2h1ZmZsZVJlc3BvbnNlEiMKBm91dHB1dBgBIAEoCUIL4j8IEgZvdXRwdXRSBm91dHB1dDJPCglTaHVmZmxpb
-  mcSQgoHU2h1ZmZsZRIZLnNodWZmbGluZy5TaHVmZmxlUmVxdWVzdBoaLnNodWZmbGluZy5TaHVmZmxlUmVzcG9uc2UiAGIGcHJvd
-  G8z"""
+  """Cg9zaHVmZmxpbmcucHJvdG8SCXNodWZmbGluZyKgAQoOU2h1ZmZsZVJlcXVlc3QSIAoFZGF0YXMYASADKAlCCuI/BxIFZGF0Y
+  XNSBWRhdGFzEjUKDGlzU2VuZEZpbmlzaBgCIAEoBUIR4j8OEgxpc1NlbmRGaW5pc2hSDGlzU2VuZEZpbmlzaBI1Cgxmcm9tV29ya
+  2VySUQYAyABKAVCEeI/DhIMZnJvbVdvcmtlcklEUgxmcm9tV29ya2VySUQiSwoPU2h1ZmZsZVJlc3BvbnNlEjgKDXNlbmRUZXJta
+  W5hdGUYASABKAVCEuI/DxINc2VuZFRlcm1pbmF0ZVINc2VuZFRlcm1pbmF0ZSJIChtTaHV0ZG93bldvcmtlclNlcnZlclJlcXVlc
+  3QSKQoId29ya2VySUQYASABKAVCDeI/ChIId29ya2VySURSCHdvcmtlcklEIkkKHFNodXRkb3duV29ya2VyU2VydmVyUmVzcG9uc
+  2USKQoIc2h1dGRvd24YASABKAVCDeI/ChIIc2h1dGRvd25SCHNodXRkb3duMroBCglTaHVmZmxpbmcSQgoHc2h1ZmZsZRIZLnNod
+  WZmbGluZy5TaHVmZmxlUmVxdWVzdBoaLnNodWZmbGluZy5TaHVmZmxlUmVzcG9uc2UiABJpChRzaHV0ZG93bldvcmtlclNlcnZlc
+  hImLnNodWZmbGluZy5TaHV0ZG93bldvcmtlclNlcnZlclJlcXVlc3QaJy5zaHVmZmxpbmcuU2h1dGRvd25Xb3JrZXJTZXJ2ZXJSZ
+  XNwb25zZSIAYgZwcm90bzM="""
       ).mkString)
   lazy val scalaDescriptor: _root_.scalapb.descriptors.FileDescriptor = {
     val scalaProto = com.google.protobuf.descriptor.FileDescriptorProto.parseFrom(ProtoBytes)

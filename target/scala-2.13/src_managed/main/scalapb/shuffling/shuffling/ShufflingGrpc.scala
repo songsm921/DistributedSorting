@@ -10,22 +10,34 @@ object ShufflingGrpc {
   val METHOD_SHUFFLE: _root_.io.grpc.MethodDescriptor[shuffling.shuffling.ShuffleRequest, shuffling.shuffling.ShuffleResponse] =
     _root_.io.grpc.MethodDescriptor.newBuilder()
       .setType(_root_.io.grpc.MethodDescriptor.MethodType.UNARY)
-      .setFullMethodName(_root_.io.grpc.MethodDescriptor.generateFullMethodName("shuffling.Shuffling", "Shuffle"))
+      .setFullMethodName(_root_.io.grpc.MethodDescriptor.generateFullMethodName("shuffling.Shuffling", "shuffle"))
       .setSampledToLocalTracing(true)
       .setRequestMarshaller(_root_.scalapb.grpc.Marshaller.forMessage[shuffling.shuffling.ShuffleRequest])
       .setResponseMarshaller(_root_.scalapb.grpc.Marshaller.forMessage[shuffling.shuffling.ShuffleResponse])
       .setSchemaDescriptor(_root_.scalapb.grpc.ConcreteProtoMethodDescriptorSupplier.fromMethodDescriptor(shuffling.shuffling.ShufflingProto.javaDescriptor.getServices().get(0).getMethods().get(0)))
       .build()
   
+  val METHOD_SHUTDOWN_WORKER_SERVER: _root_.io.grpc.MethodDescriptor[shuffling.shuffling.ShutdownWorkerServerRequest, shuffling.shuffling.ShutdownWorkerServerResponse] =
+    _root_.io.grpc.MethodDescriptor.newBuilder()
+      .setType(_root_.io.grpc.MethodDescriptor.MethodType.UNARY)
+      .setFullMethodName(_root_.io.grpc.MethodDescriptor.generateFullMethodName("shuffling.Shuffling", "shutdownWorkerServer"))
+      .setSampledToLocalTracing(true)
+      .setRequestMarshaller(_root_.scalapb.grpc.Marshaller.forMessage[shuffling.shuffling.ShutdownWorkerServerRequest])
+      .setResponseMarshaller(_root_.scalapb.grpc.Marshaller.forMessage[shuffling.shuffling.ShutdownWorkerServerResponse])
+      .setSchemaDescriptor(_root_.scalapb.grpc.ConcreteProtoMethodDescriptorSupplier.fromMethodDescriptor(shuffling.shuffling.ShufflingProto.javaDescriptor.getServices().get(0).getMethods().get(1)))
+      .build()
+  
   val SERVICE: _root_.io.grpc.ServiceDescriptor =
     _root_.io.grpc.ServiceDescriptor.newBuilder("shuffling.Shuffling")
       .setSchemaDescriptor(new _root_.scalapb.grpc.ConcreteProtoFileDescriptorSupplier(shuffling.shuffling.ShufflingProto.javaDescriptor))
       .addMethod(METHOD_SHUFFLE)
+      .addMethod(METHOD_SHUTDOWN_WORKER_SERVER)
       .build()
   
   trait Shuffling extends _root_.scalapb.grpc.AbstractService {
     override def serviceCompanion = Shuffling
     def shuffle(request: shuffling.shuffling.ShuffleRequest): scala.concurrent.Future[shuffling.shuffling.ShuffleResponse]
+    def shutdownWorkerServer(request: shuffling.shuffling.ShutdownWorkerServerRequest): scala.concurrent.Future[shuffling.shuffling.ShutdownWorkerServerResponse]
   }
   
   object Shuffling extends _root_.scalapb.grpc.ServiceCompanion[Shuffling] {
@@ -41,17 +53,29 @@ object ShufflingGrpc {
             serviceImpl.shuffle(request).onComplete(scalapb.grpc.Grpc.completeObserver(observer))(
               executionContext)
         }))
+      .addMethod(
+        METHOD_SHUTDOWN_WORKER_SERVER,
+        _root_.io.grpc.stub.ServerCalls.asyncUnaryCall(new _root_.io.grpc.stub.ServerCalls.UnaryMethod[shuffling.shuffling.ShutdownWorkerServerRequest, shuffling.shuffling.ShutdownWorkerServerResponse] {
+          override def invoke(request: shuffling.shuffling.ShutdownWorkerServerRequest, observer: _root_.io.grpc.stub.StreamObserver[shuffling.shuffling.ShutdownWorkerServerResponse]): _root_.scala.Unit =
+            serviceImpl.shutdownWorkerServer(request).onComplete(scalapb.grpc.Grpc.completeObserver(observer))(
+              executionContext)
+        }))
       .build()
   }
   
   trait ShufflingBlockingClient {
     def serviceCompanion = Shuffling
     def shuffle(request: shuffling.shuffling.ShuffleRequest): shuffling.shuffling.ShuffleResponse
+    def shutdownWorkerServer(request: shuffling.shuffling.ShutdownWorkerServerRequest): shuffling.shuffling.ShutdownWorkerServerResponse
   }
   
   class ShufflingBlockingStub(channel: _root_.io.grpc.Channel, options: _root_.io.grpc.CallOptions = _root_.io.grpc.CallOptions.DEFAULT) extends _root_.io.grpc.stub.AbstractStub[ShufflingBlockingStub](channel, options) with ShufflingBlockingClient {
     override def shuffle(request: shuffling.shuffling.ShuffleRequest): shuffling.shuffling.ShuffleResponse = {
       _root_.scalapb.grpc.ClientCalls.blockingUnaryCall(channel, METHOD_SHUFFLE, options, request)
+    }
+    
+    override def shutdownWorkerServer(request: shuffling.shuffling.ShutdownWorkerServerRequest): shuffling.shuffling.ShutdownWorkerServerResponse = {
+      _root_.scalapb.grpc.ClientCalls.blockingUnaryCall(channel, METHOD_SHUTDOWN_WORKER_SERVER, options, request)
     }
     
     override def build(channel: _root_.io.grpc.Channel, options: _root_.io.grpc.CallOptions): ShufflingBlockingStub = new ShufflingBlockingStub(channel, options)
@@ -60,6 +84,10 @@ object ShufflingGrpc {
   class ShufflingStub(channel: _root_.io.grpc.Channel, options: _root_.io.grpc.CallOptions = _root_.io.grpc.CallOptions.DEFAULT) extends _root_.io.grpc.stub.AbstractStub[ShufflingStub](channel, options) with Shuffling {
     override def shuffle(request: shuffling.shuffling.ShuffleRequest): scala.concurrent.Future[shuffling.shuffling.ShuffleResponse] = {
       _root_.scalapb.grpc.ClientCalls.asyncUnaryCall(channel, METHOD_SHUFFLE, options, request)
+    }
+    
+    override def shutdownWorkerServer(request: shuffling.shuffling.ShutdownWorkerServerRequest): scala.concurrent.Future[shuffling.shuffling.ShutdownWorkerServerResponse] = {
+      _root_.scalapb.grpc.ClientCalls.asyncUnaryCall(channel, METHOD_SHUTDOWN_WORKER_SERVER, options, request)
     }
     
     override def build(channel: _root_.io.grpc.Channel, options: _root_.io.grpc.CallOptions): ShufflingStub = new ShufflingStub(channel, options)

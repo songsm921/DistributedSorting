@@ -47,6 +47,16 @@ object GeneralnetGrpc {
       .setSchemaDescriptor(_root_.scalapb.grpc.ConcreteProtoMethodDescriptorSupplier.fromMethodDescriptor(generalnet.generalNet.GeneralNetProto.javaDescriptor.getServices().get(0).getMethods().get(3)))
       .build()
   
+  val METHOD_START_SHUFFLING_MSG2MASTER: _root_.io.grpc.MethodDescriptor[generalnet.generalNet.StartShufflingMsg2MasterRequest, generalnet.generalNet.StartShufflingMsg2MasterResponse] =
+    _root_.io.grpc.MethodDescriptor.newBuilder()
+      .setType(_root_.io.grpc.MethodDescriptor.MethodType.UNARY)
+      .setFullMethodName(_root_.io.grpc.MethodDescriptor.generateFullMethodName("generalnet.Generalnet", "startShufflingMsg2Master"))
+      .setSampledToLocalTracing(true)
+      .setRequestMarshaller(_root_.scalapb.grpc.Marshaller.forMessage[generalnet.generalNet.StartShufflingMsg2MasterRequest])
+      .setResponseMarshaller(_root_.scalapb.grpc.Marshaller.forMessage[generalnet.generalNet.StartShufflingMsg2MasterResponse])
+      .setSchemaDescriptor(_root_.scalapb.grpc.ConcreteProtoMethodDescriptorSupplier.fromMethodDescriptor(generalnet.generalNet.GeneralNetProto.javaDescriptor.getServices().get(0).getMethods().get(4)))
+      .build()
+  
   val SERVICE: _root_.io.grpc.ServiceDescriptor =
     _root_.io.grpc.ServiceDescriptor.newBuilder("generalnet.Generalnet")
       .setSchemaDescriptor(new _root_.scalapb.grpc.ConcreteProtoFileDescriptorSupplier(generalnet.generalNet.GeneralNetProto.javaDescriptor))
@@ -54,6 +64,7 @@ object GeneralnetGrpc {
       .addMethod(METHOD_SORT_END_MSG2MASTER)
       .addMethod(METHOD_SAMPLING_END_MSG2MASTER)
       .addMethod(METHOD_PARTITIONING_END_MSG2MASTER)
+      .addMethod(METHOD_START_SHUFFLING_MSG2MASTER)
       .build()
   
   trait Generalnet extends _root_.scalapb.grpc.AbstractService {
@@ -62,6 +73,7 @@ object GeneralnetGrpc {
     def sortEndMsg2Master(request: generalnet.generalNet.SortEndMsg2MasterRequest): scala.concurrent.Future[generalnet.generalNet.SortEndMsg2MasterResponse]
     def samplingEndMsg2Master(request: generalnet.generalNet.SamplingEndMsg2MasterRequest): scala.concurrent.Future[generalnet.generalNet.SamplingEndMsg2MasterResponse]
     def partitioningEndMsg2Master(request: generalnet.generalNet.PartitioningEndMsg2MasterRequest): scala.concurrent.Future[generalnet.generalNet.PartitioningEndMsg2MasterResponse]
+    def startShufflingMsg2Master(request: generalnet.generalNet.StartShufflingMsg2MasterRequest): scala.concurrent.Future[generalnet.generalNet.StartShufflingMsg2MasterResponse]
   }
   
   object Generalnet extends _root_.scalapb.grpc.ServiceCompanion[Generalnet] {
@@ -98,6 +110,13 @@ object GeneralnetGrpc {
             serviceImpl.partitioningEndMsg2Master(request).onComplete(scalapb.grpc.Grpc.completeObserver(observer))(
               executionContext)
         }))
+      .addMethod(
+        METHOD_START_SHUFFLING_MSG2MASTER,
+        _root_.io.grpc.stub.ServerCalls.asyncUnaryCall(new _root_.io.grpc.stub.ServerCalls.UnaryMethod[generalnet.generalNet.StartShufflingMsg2MasterRequest, generalnet.generalNet.StartShufflingMsg2MasterResponse] {
+          override def invoke(request: generalnet.generalNet.StartShufflingMsg2MasterRequest, observer: _root_.io.grpc.stub.StreamObserver[generalnet.generalNet.StartShufflingMsg2MasterResponse]): _root_.scala.Unit =
+            serviceImpl.startShufflingMsg2Master(request).onComplete(scalapb.grpc.Grpc.completeObserver(observer))(
+              executionContext)
+        }))
       .build()
   }
   
@@ -107,6 +126,7 @@ object GeneralnetGrpc {
     def sortEndMsg2Master(request: generalnet.generalNet.SortEndMsg2MasterRequest): generalnet.generalNet.SortEndMsg2MasterResponse
     def samplingEndMsg2Master(request: generalnet.generalNet.SamplingEndMsg2MasterRequest): generalnet.generalNet.SamplingEndMsg2MasterResponse
     def partitioningEndMsg2Master(request: generalnet.generalNet.PartitioningEndMsg2MasterRequest): generalnet.generalNet.PartitioningEndMsg2MasterResponse
+    def startShufflingMsg2Master(request: generalnet.generalNet.StartShufflingMsg2MasterRequest): generalnet.generalNet.StartShufflingMsg2MasterResponse
   }
   
   class GeneralnetBlockingStub(channel: _root_.io.grpc.Channel, options: _root_.io.grpc.CallOptions = _root_.io.grpc.CallOptions.DEFAULT) extends _root_.io.grpc.stub.AbstractStub[GeneralnetBlockingStub](channel, options) with GeneralnetBlockingClient {
@@ -124,6 +144,10 @@ object GeneralnetGrpc {
     
     override def partitioningEndMsg2Master(request: generalnet.generalNet.PartitioningEndMsg2MasterRequest): generalnet.generalNet.PartitioningEndMsg2MasterResponse = {
       _root_.scalapb.grpc.ClientCalls.blockingUnaryCall(channel, METHOD_PARTITIONING_END_MSG2MASTER, options, request)
+    }
+    
+    override def startShufflingMsg2Master(request: generalnet.generalNet.StartShufflingMsg2MasterRequest): generalnet.generalNet.StartShufflingMsg2MasterResponse = {
+      _root_.scalapb.grpc.ClientCalls.blockingUnaryCall(channel, METHOD_START_SHUFFLING_MSG2MASTER, options, request)
     }
     
     override def build(channel: _root_.io.grpc.Channel, options: _root_.io.grpc.CallOptions): GeneralnetBlockingStub = new GeneralnetBlockingStub(channel, options)
@@ -144,6 +168,10 @@ object GeneralnetGrpc {
     
     override def partitioningEndMsg2Master(request: generalnet.generalNet.PartitioningEndMsg2MasterRequest): scala.concurrent.Future[generalnet.generalNet.PartitioningEndMsg2MasterResponse] = {
       _root_.scalapb.grpc.ClientCalls.asyncUnaryCall(channel, METHOD_PARTITIONING_END_MSG2MASTER, options, request)
+    }
+    
+    override def startShufflingMsg2Master(request: generalnet.generalNet.StartShufflingMsg2MasterRequest): scala.concurrent.Future[generalnet.generalNet.StartShufflingMsg2MasterResponse] = {
+      _root_.scalapb.grpc.ClientCalls.asyncUnaryCall(channel, METHOD_START_SHUFFLING_MSG2MASTER, options, request)
     }
     
     override def build(channel: _root_.io.grpc.Channel, options: _root_.io.grpc.CallOptions): GeneralnetStub = new GeneralnetStub(channel, options)

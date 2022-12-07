@@ -2,6 +2,8 @@ package utils
 
 import java.net.{DatagramSocket, InetAddress}
 import scala.collection.mutable.ListBuffer
+import scala.io.Source
+import java.io.File
 object util {
   def getMyIpAddress: String = {
     val socket = new DatagramSocket
@@ -23,6 +25,32 @@ object util {
     argList.remove(0) // remove -O
     val outputPath = argList.remove(0)
     (masterIP, masterPort, inputDirectoryList, outputPath)
+  }
+
+  def splitFileper4MB(path: String,startLines: Int) = {
+      val targetList = ListBuffer[String]()
+      val lines = Source.fromFile(path).getLines().toList
+      var isFinish = 0
+      val destLines = startLines + 40000
+      if(destLines >= lines.length){
+        for(i <- startLines until lines.length){
+          targetList.append(lines(i))
+        }
+        isFinish = 1
+      }
+      else{
+        for (i <- startLines to destLines) {
+          targetList.append(lines(i))
+        }
+        isFinish = 0
+      }
+      if(isFinish == 0){
+        (targetList,destLines + 1)
+      }
+      else{
+        (targetList,-1)
+      }
+
   }
 }
 
