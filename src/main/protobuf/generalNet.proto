@@ -5,6 +5,7 @@ package generalnet;
 service Generalnet {
   rpc connect2Server (Connect2ServerRequest) returns (Connect2ServerResponse) {}
   rpc sortEndMsg2Master (SortEndMsg2MasterRequest) returns (SortEndMsg2MasterResponse) {}
+  rpc samplingEndMsg2Master (SamplingEndMsg2MasterRequest) returns (SamplingEndMsg2MasterResponse) {}
 }
 
 message Connect2ServerRequest {
@@ -23,4 +24,13 @@ message SortEndMsg2MasterRequest {
 
 message SortEndMsg2MasterResponse {
   int32 startNext = 1;
+}
+
+message SamplingEndMsg2MasterRequest {
+  int32 workerID = 1;
+  repeated string samples = 2;
+}
+
+message SamplingEndMsg2MasterResponse {
+  repeated string totalSamples = 1;
 }

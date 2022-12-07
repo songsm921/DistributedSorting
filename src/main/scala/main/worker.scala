@@ -17,6 +17,7 @@ object worker {
     val inputDirectoryList = parameter._3
     val outputPath = parameter._4
     val client = new workerClient(masterIP,masterPort,outputPath)
+    // make method in Util module next
     for (inputDirectory <- inputDirectoryList){
       val dir =  new File(inputDirectory)
       val files = dir.listFiles.filter(_.isFile).toList
@@ -27,9 +28,10 @@ object worker {
       client.connect2Server()
       client.startSort()
       client.sortEndMsg2Master()
-      /*
+
       client.startSampling()
       client.samplingEndMsg2Master()
+      /*
       client.startPartitioning()
       client.partitioningEndMsg2Master()*/
       /*Start Shuffling*/

@@ -12,8 +12,9 @@ import scala.io.Source
 import java.util.concurrent.TimeUnit
 import scala.concurrent.{Future, Promise}
 import utils.{util, Phase, workerPhase}
-import generalnet.generalNet.{GeneralnetGrpc,Connect2ServerRequest,Connect2ServerResponse,SortEndMsg2MasterRequest,SortEndMsg2MasterResponse}
-import module.sort
+import generalnet.generalNet.{GeneralnetGrpc,Connect2ServerRequest,Connect2ServerResponse,SortEndMsg2MasterRequest,SortEndMsg2MasterResponse,
+  SamplingEndMsg2MasterRequest, SamplingEndMsg2MasterResponse}
+import module.{sort,sample}
 
 class workerClient(host: String, port: Int, outputAbsoluteDir : String) extends Logging {
   val channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().asInstanceOf[ManagedChannelBuilder[_]].build
@@ -22,6 +23,9 @@ class workerClient(host: String, port: Int, outputAbsoluteDir : String) extends 
   var totalWorkerNum = -1
   var myWorkerNum = -1
   val workersIPList = ListBuffer[String]()
+  var samplesList2Master = ListBuffer[String]()
+  var partitionRanges = Array[String]()
+  var myPartitionRange = Array[String]("noRangeYet", "noRangeYet")
   def shutdown() = {
     channel.shutdown().awaitTermination(5, TimeUnit.SECONDS)
   }
@@ -33,7 +37,6 @@ class workerClient(host: String, port: Int, outputAbsoluteDir : String) extends 
   def connect2Server(): Unit = {
     val request = Connect2ServerRequest(workerIpAddress = util.getMyIpAddress)
     try{
-      /* Add Sorting Input File*/
       val response = stub.connect2Server(request)
       totalWorkerNum = response.workerNum
       myWorkerNum = response.workerID
@@ -69,5 +72,33 @@ class workerClient(host: String, port: Int, outputAbsoluteDir : String) extends 
           logger.warn(s"RPC failed: ${e.getStatus}")
           return
       }
+  }
+
+  def startSampling()   = {
+    val sampleInstance  = new sample()
+    samplesList2Master = sampleInstance.sampleFile(inputAbsolutePath)
+  }
+
+  def samplingEndMsg2Master(): Unit = {
+    val samples2Master = samplesList2Master.toList.sorted
+    val request = SamplingEndMsg2MasterRequest(workerID = myWorkerNum, samples = samples2Master)
+    try {
+      val response = stub.samplingEndMsg2Master(request)
+      logger.info("Sample Range is coming! " + myWorkerNum)
+      partitionRanges = partitionRanges.concat(response.totalSamples.toArray)
+      for (i <- 0 to response.totalSamples.toList.length - 1) {
+        logger.info("PartitionRange[" + i + "] : " + partitionRanges(i))
+      }
+      myPartitionRange(0) = partitionRanges(2 * myWorkerNum)
+      myPartitionRange(1) = partitionRanges(2 * myWorkerNum + 1)
+      logger.info("My Partition Range starts from: " + myPartitionRange(0))
+      logger.info("My Partition Range ends to: " + myPartitionRange(1))
+      /* Save total Samples */
+    }
+    catch {
+      case e: StatusRuntimeException =>
+        logger.warn(s"RPC failed: ${e.getStatus}")
+        return
+    }
   }
 }

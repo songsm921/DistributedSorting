@@ -8,9 +8,14 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/protobuf/generalNet.proto" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/protobuf/generalNet.proto" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/scala/main/worker.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/main/worker.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/module/sort.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/module/sort.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/scala/module/sample.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/module/sample.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/scala/network/MasterServer.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/network/MasterServer.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/scala/network/WorkerClinet.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/network/WorkerClinet.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/global-logging/sbt-global-log14729919694601272869.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/global-logging/sbt-global-log9516579743903859858.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.13/src_managed/main/scalapb/generalnet/generalNet/GeneralNetProto.scala" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.13/src_managed/main/scalapb/generalnet/generalNet/GeneralNetProto.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.13/src_managed/main/scalapb/generalnet/generalNet/GeneralnetGrpc.scala" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.13/src_managed/main/scalapb/generalnet/generalNet/GeneralnetGrpc.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.13/zinc/inc_compile_2.13.zip" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.13/zinc/inc_compile_2.13.zip" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +110,8 @@
       <workItem from="1670355409886" duration="2411000" />
       <workItem from="1670357852285" duration="115000" />
       <workItem from="1670357976908" duration="1096000" />
-      <workItem from="1670384255439" duration="1369000" />
+      <workItem from="1670384255439" duration="2523000" />
+      <workItem from="1670386936958" duration="5275000" />
     </task>
     <servers />
   </component>
