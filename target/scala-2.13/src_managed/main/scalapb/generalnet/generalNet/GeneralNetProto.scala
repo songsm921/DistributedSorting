@@ -10,16 +10,21 @@ object GeneralNetProto extends _root_.scalapb.GeneratedFileObject {
   lazy val messagesCompanions: Seq[_root_.scalapb.GeneratedMessageCompanion[_ <: _root_.scalapb.GeneratedMessage]] =
     Seq[_root_.scalapb.GeneratedMessageCompanion[_ <: _root_.scalapb.GeneratedMessage]](
       generalnet.generalNet.Connect2ServerRequest,
-      generalnet.generalNet.Connect2ServerResponse
+      generalnet.generalNet.Connect2ServerResponse,
+      generalnet.generalNet.SortEndMsg2MasterRequest,
+      generalnet.generalNet.SortEndMsg2MasterResponse
     )
   private lazy val ProtoBytes: _root_.scala.Array[Byte] =
       scalapb.Encoding.fromBase64(scala.collection.immutable.Seq(
   """ChBnZW5lcmFsTmV0LnByb3RvEgpnZW5lcmFsbmV0IlcKFUNvbm5lY3QyU2VydmVyUmVxdWVzdBI+Cg93b3JrZXJJcEFkZHJlc
   3MYASABKAlCFOI/ERIPd29ya2VySXBBZGRyZXNzUg93b3JrZXJJcEFkZHJlc3MiqAEKFkNvbm5lY3QyU2VydmVyUmVzcG9uc2USK
   QoId29ya2VySUQYASABKAVCDeI/ChIId29ya2VySURSCHdvcmtlcklEEiwKCXdvcmtlck51bRgDIAEoBUIO4j8LEgl3b3JrZXJOd
-  W1SCXdvcmtlck51bRI1Cgx3b3JrZXJJUExpc3QYAiADKAlCEeI/DhIMd29ya2VySVBMaXN0Ugx3b3JrZXJJUExpc3QyZwoKR2VuZ
-  XJhbG5ldBJZCg5jb25uZWN0MlNlcnZlchIhLmdlbmVyYWxuZXQuQ29ubmVjdDJTZXJ2ZXJSZXF1ZXN0GiIuZ2VuZXJhbG5ldC5Db
-  25uZWN0MlNlcnZlclJlc3BvbnNlIgBiBnByb3RvMw=="""
+  W1SCXdvcmtlck51bRI1Cgx3b3JrZXJJUExpc3QYAiADKAlCEeI/DhIMd29ya2VySVBMaXN0Ugx3b3JrZXJJUExpc3QiRQoYU29yd
+  EVuZE1zZzJNYXN0ZXJSZXF1ZXN0EikKCHdvcmtlcklEGAEgASgFQg3iPwoSCHdvcmtlcklEUgh3b3JrZXJJRCJJChlTb3J0RW5kT
+  XNnMk1hc3RlclJlc3BvbnNlEiwKCXN0YXJ0TmV4dBgBIAEoBUIO4j8LEglzdGFydE5leHRSCXN0YXJ0TmV4dDLLAQoKR2VuZXJhb
+  G5ldBJZCg5jb25uZWN0MlNlcnZlchIhLmdlbmVyYWxuZXQuQ29ubmVjdDJTZXJ2ZXJSZXF1ZXN0GiIuZ2VuZXJhbG5ldC5Db25uZ
+  WN0MlNlcnZlclJlc3BvbnNlIgASYgoRc29ydEVuZE1zZzJNYXN0ZXISJC5nZW5lcmFsbmV0LlNvcnRFbmRNc2cyTWFzdGVyUmVxd
+  WVzdBolLmdlbmVyYWxuZXQuU29ydEVuZE1zZzJNYXN0ZXJSZXNwb25zZSIAYgZwcm90bzM="""
       ).mkString)
   lazy val scalaDescriptor: _root_.scalapb.descriptors.FileDescriptor = {
     val scalaProto = com.google.protobuf.descriptor.FileDescriptorProto.parseFrom(ProtoBytes)

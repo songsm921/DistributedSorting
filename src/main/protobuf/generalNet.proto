@@ -4,6 +4,7 @@ package generalnet;
 
 service Generalnet {
   rpc connect2Server (Connect2ServerRequest) returns (Connect2ServerResponse) {}
+  rpc sortEndMsg2Master (SortEndMsg2MasterRequest) returns (SortEndMsg2MasterResponse) {}
 }
 
 message Connect2ServerRequest {
@@ -14,4 +15,12 @@ message Connect2ServerResponse {
   int32 workerID = 1;
   int32 workerNum = 3;
   repeated string workerIPList = 2;
+}
+
+message SortEndMsg2MasterRequest {
+  int32 workerID = 1;
+}
+
+message SortEndMsg2MasterResponse {
+  int32 startNext = 1;
 }

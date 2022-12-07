@@ -7,12 +7,13 @@ import java.util.concurrent.CountDownLatch
 import io.grpc.{Server, ServerBuilder}
 
 import scala.collection.mutable.ListBuffer
-import generalnet.generalNet.{Connect2ServerRequest, Connect2ServerResponse, GeneralnetGrpc}
+import generalnet.generalNet.{Connect2ServerRequest, Connect2ServerResponse,SortEndMsg2MasterRequest,SortEndMsg2MasterResponse, GeneralnetGrpc}
 import utils.util.getMyIpAddress
 class MasterServer(executionContext: ExecutionContext, val numClient: Int, val Port: Int) extends Logging {
   self =>
   private[this] var server: Server = null
   private val clientLatch: CountDownLatch = new CountDownLatch(numClient)
+  private val sortLatch: CountDownLatch = new CountDownLatch(numClient)
   private val workerIPList : ListBuffer[String] = ListBuffer[String]()
   def start() = {
     server = ServerBuilder.forPort(Port).addService(GeneralnetGrpc.bindService(new GeneralnetImpl, executionContext)).build.start
@@ -46,6 +47,14 @@ class MasterServer(executionContext: ExecutionContext, val numClient: Int, val P
       clientLatch.countDown()
       clientLatch.await()
       val response = Connect2ServerResponse(workerID = _workerID_,workerNum = numClient,workerIPList = workerIPList.toList)
+      Future.successful(response)
+    }
+
+    override def sortEndMsg2Master(request: SortEndMsg2MasterRequest): Future[SortEndMsg2MasterResponse] = {
+      logger.info("Sorted Finished from Worker: " + request.workerID)
+      sortLatch.countDown()
+      sortLatch.await()
+      val response = SortEndMsg2MasterResponse(startNext = 1)
       Future.successful(response)
     }
   }

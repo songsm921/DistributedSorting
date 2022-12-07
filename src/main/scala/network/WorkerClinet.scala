@@ -12,12 +12,13 @@ import scala.io.Source
 import java.util.concurrent.TimeUnit
 import scala.concurrent.{Future, Promise}
 import utils.{util, Phase, workerPhase}
-import generalnet.generalNet.{GeneralnetGrpc,Connect2ServerRequest,Connect2ServerResponse}
+import generalnet.generalNet.{GeneralnetGrpc,Connect2ServerRequest,Connect2ServerResponse,SortEndMsg2MasterRequest,SortEndMsg2MasterResponse}
+import module.sort
 
 class workerClient(host: String, port: Int, outputAbsoluteDir : String) extends Logging {
   val channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().asInstanceOf[ManagedChannelBuilder[_]].build
   val stub = GeneralnetGrpc.blockingStub(channel)
-  val inputAbsoluteDir = ListBuffer[String]()
+  val inputAbsolutePath = ListBuffer[String]()
   var totalWorkerNum = -1
   var myWorkerNum = -1
   val workersIPList = ListBuffer[String]()
@@ -26,7 +27,7 @@ class workerClient(host: String, port: Int, outputAbsoluteDir : String) extends 
   }
 
   def addInputAbsolutePath(inputAbsolutePath : ListBuffer[String]) = {
-    inputAbsoluteDir.appendAll(inputAbsolutePath)
+    inputAbsolutePath.appendAll(inputAbsolutePath)
   }
 
   def connect2Server(): Unit = {
@@ -41,6 +42,26 @@ class workerClient(host: String, port: Int, outputAbsoluteDir : String) extends 
         logger.info("Worker IP: " + ip)
       }
       logger.info("connect2Server response: " + response.workerID + " " + response.workerNum)
+    }
+    catch
+      {
+        case e: StatusRuntimeException =>
+          logger.warn(s"RPC failed: ${e.getStatus}")
+          return
+      }
+  }
+
+  def startSort() = {
+  val sortInstance = new sort()
+  for(path <- inputAbsolutePath){
+    sortInstance.sortFile(path)
+    }
+  }
+  def sortEndMsg2Master(): Unit = {
+    val request = SortEndMsg2MasterRequest(workerID = myWorkerNum)
+    try{
+      val response = stub.sortEndMsg2Master(request)
+      logger.info("sortEndMsg2Master response: " + response)
     }
     catch
       {

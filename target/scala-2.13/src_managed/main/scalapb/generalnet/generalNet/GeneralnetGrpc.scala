@@ -17,15 +17,27 @@ object GeneralnetGrpc {
       .setSchemaDescriptor(_root_.scalapb.grpc.ConcreteProtoMethodDescriptorSupplier.fromMethodDescriptor(generalnet.generalNet.GeneralNetProto.javaDescriptor.getServices().get(0).getMethods().get(0)))
       .build()
   
+  val METHOD_SORT_END_MSG2MASTER: _root_.io.grpc.MethodDescriptor[generalnet.generalNet.SortEndMsg2MasterRequest, generalnet.generalNet.SortEndMsg2MasterResponse] =
+    _root_.io.grpc.MethodDescriptor.newBuilder()
+      .setType(_root_.io.grpc.MethodDescriptor.MethodType.UNARY)
+      .setFullMethodName(_root_.io.grpc.MethodDescriptor.generateFullMethodName("generalnet.Generalnet", "sortEndMsg2Master"))
+      .setSampledToLocalTracing(true)
+      .setRequestMarshaller(_root_.scalapb.grpc.Marshaller.forMessage[generalnet.generalNet.SortEndMsg2MasterRequest])
+      .setResponseMarshaller(_root_.scalapb.grpc.Marshaller.forMessage[generalnet.generalNet.SortEndMsg2MasterResponse])
+      .setSchemaDescriptor(_root_.scalapb.grpc.ConcreteProtoMethodDescriptorSupplier.fromMethodDescriptor(generalnet.generalNet.GeneralNetProto.javaDescriptor.getServices().get(0).getMethods().get(1)))
+      .build()
+  
   val SERVICE: _root_.io.grpc.ServiceDescriptor =
     _root_.io.grpc.ServiceDescriptor.newBuilder("generalnet.Generalnet")
       .setSchemaDescriptor(new _root_.scalapb.grpc.ConcreteProtoFileDescriptorSupplier(generalnet.generalNet.GeneralNetProto.javaDescriptor))
       .addMethod(METHOD_CONNECT2SERVER)
+      .addMethod(METHOD_SORT_END_MSG2MASTER)
       .build()
   
   trait Generalnet extends _root_.scalapb.grpc.AbstractService {
     override def serviceCompanion = Generalnet
     def connect2Server(request: generalnet.generalNet.Connect2ServerRequest): scala.concurrent.Future[generalnet.generalNet.Connect2ServerResponse]
+    def sortEndMsg2Master(request: generalnet.generalNet.SortEndMsg2MasterRequest): scala.concurrent.Future[generalnet.generalNet.SortEndMsg2MasterResponse]
   }
   
   object Generalnet extends _root_.scalapb.grpc.ServiceCompanion[Generalnet] {
@@ -41,17 +53,29 @@ object GeneralnetGrpc {
             serviceImpl.connect2Server(request).onComplete(scalapb.grpc.Grpc.completeObserver(observer))(
               executionContext)
         }))
+      .addMethod(
+        METHOD_SORT_END_MSG2MASTER,
+        _root_.io.grpc.stub.ServerCalls.asyncUnaryCall(new _root_.io.grpc.stub.ServerCalls.UnaryMethod[generalnet.generalNet.SortEndMsg2MasterRequest, generalnet.generalNet.SortEndMsg2MasterResponse] {
+          override def invoke(request: generalnet.generalNet.SortEndMsg2MasterRequest, observer: _root_.io.grpc.stub.StreamObserver[generalnet.generalNet.SortEndMsg2MasterResponse]): _root_.scala.Unit =
+            serviceImpl.sortEndMsg2Master(request).onComplete(scalapb.grpc.Grpc.completeObserver(observer))(
+              executionContext)
+        }))
       .build()
   }
   
   trait GeneralnetBlockingClient {
     def serviceCompanion = Generalnet
     def connect2Server(request: generalnet.generalNet.Connect2ServerRequest): generalnet.generalNet.Connect2ServerResponse
+    def sortEndMsg2Master(request: generalnet.generalNet.SortEndMsg2MasterRequest): generalnet.generalNet.SortEndMsg2MasterResponse
   }
   
   class GeneralnetBlockingStub(channel: _root_.io.grpc.Channel, options: _root_.io.grpc.CallOptions = _root_.io.grpc.CallOptions.DEFAULT) extends _root_.io.grpc.stub.AbstractStub[GeneralnetBlockingStub](channel, options) with GeneralnetBlockingClient {
     override def connect2Server(request: generalnet.generalNet.Connect2ServerRequest): generalnet.generalNet.Connect2ServerResponse = {
       _root_.scalapb.grpc.ClientCalls.blockingUnaryCall(channel, METHOD_CONNECT2SERVER, options, request)
+    }
+    
+    override def sortEndMsg2Master(request: generalnet.generalNet.SortEndMsg2MasterRequest): generalnet.generalNet.SortEndMsg2MasterResponse = {
+      _root_.scalapb.grpc.ClientCalls.blockingUnaryCall(channel, METHOD_SORT_END_MSG2MASTER, options, request)
     }
     
     override def build(channel: _root_.io.grpc.Channel, options: _root_.io.grpc.CallOptions): GeneralnetBlockingStub = new GeneralnetBlockingStub(channel, options)
@@ -60,6 +84,10 @@ object GeneralnetGrpc {
   class GeneralnetStub(channel: _root_.io.grpc.Channel, options: _root_.io.grpc.CallOptions = _root_.io.grpc.CallOptions.DEFAULT) extends _root_.io.grpc.stub.AbstractStub[GeneralnetStub](channel, options) with Generalnet {
     override def connect2Server(request: generalnet.generalNet.Connect2ServerRequest): scala.concurrent.Future[generalnet.generalNet.Connect2ServerResponse] = {
       _root_.scalapb.grpc.ClientCalls.asyncUnaryCall(channel, METHOD_CONNECT2SERVER, options, request)
+    }
+    
+    override def sortEndMsg2Master(request: generalnet.generalNet.SortEndMsg2MasterRequest): scala.concurrent.Future[generalnet.generalNet.SortEndMsg2MasterResponse] = {
+      _root_.scalapb.grpc.ClientCalls.asyncUnaryCall(channel, METHOD_SORT_END_MSG2MASTER, options, request)
     }
     
     override def build(channel: _root_.io.grpc.Channel, options: _root_.io.grpc.CallOptions): GeneralnetStub = new GeneralnetStub(channel, options)

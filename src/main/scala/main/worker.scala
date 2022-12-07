@@ -25,16 +25,15 @@ object worker {
     }
     try{
       client.connect2Server()
-      val server = new MasterServer(ExecutionContext.global,client.totalWorkerNum-1,workerPort)
-      server.start()
-      server.printEndpoint()
-      for(i<-0 until client.totalWorkerNum){
-        if(i != client.myWorkerNum){
-          val worker2worker = new workerClient(client.workersIPList(i),workerPort,outputPath)
-          worker2worker.connect2Server()
-        }
+      client.startSort()
+      client.sortEndMsg2Master()
+      /*
+      client.startSampling()
+      client.samplingEndMsg2Master()
+      client.startPartitioning()
+      client.partitioningEndMsg2Master()*/
+      /*Start Shuffling*/
 
-      }
     }
     catch {
       case e: Exception => println("Exception: " + e)
