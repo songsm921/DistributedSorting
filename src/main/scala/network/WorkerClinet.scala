@@ -13,8 +13,8 @@ import java.util.concurrent.TimeUnit
 import scala.concurrent.{Future, Promise}
 import utils.{util, Phase, workerPhase}
 import generalnet.generalNet.{GeneralnetGrpc,Connect2ServerRequest,Connect2ServerResponse,SortEndMsg2MasterRequest,SortEndMsg2MasterResponse,
-  SamplingEndMsg2MasterRequest, SamplingEndMsg2MasterResponse}
-import module.{sort,sample}
+  SamplingEndMsg2MasterRequest, SamplingEndMsg2MasterResponse, PartitioningEndMsg2MasterRequest, PartitioningEndMsg2MasterResponse}
+import module.{sort,sample,partition}
 
 class workerClient(host: String, port: Int, outputAbsoluteDir : String) extends Logging {
   val channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().asInstanceOf[ManagedChannelBuilder[_]].build
@@ -100,5 +100,28 @@ class workerClient(host: String, port: Int, outputAbsoluteDir : String) extends 
         logger.warn(s"RPC failed: ${e.getStatus}")
         return
     }
+  }
+
+  def startPartitioning(): Unit = {
+    val partitionInstance = new partition()
+    partitionInstance.createWriterForTest(totalWorkerNum)
+    for(path <- inputAbsolutePath){
+      partitionInstance.partitionEachLine(path, partitionRanges)
+    }
+    partitionInstance.closeInstWriter()
+  }
+
+  def partitioningEndMsg2Master(): Unit = {
+    val request = PartitioningEndMsg2MasterRequest(workerID = myWorkerNum)
+    try{
+      val response = stub.partitioningEndMsg2Master(request)
+      logger.info("partitioningEndMsg2Master response: " + response)
+    }
+    catch
+      {
+        case e: StatusRuntimeException =>
+          logger.warn(s"RPC failed: ${e.getStatus}")
+          return
+      }
   }
 }

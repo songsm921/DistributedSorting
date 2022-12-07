@@ -7,7 +7,8 @@ import java.util.concurrent.CountDownLatch
 import io.grpc.{Server, ServerBuilder}
 import utils.util.getMyIpAddress
 import scala.collection.mutable.ListBuffer
-import generalnet.generalNet.{Connect2ServerRequest, Connect2ServerResponse,SortEndMsg2MasterRequest,SortEndMsg2MasterResponse, GeneralnetGrpc, SamplingEndMsg2MasterRequest, SamplingEndMsg2MasterResponse}
+import generalnet.generalNet.{Connect2ServerRequest, Connect2ServerResponse,SortEndMsg2MasterRequest,SortEndMsg2MasterResponse, GeneralnetGrpc,
+  SamplingEndMsg2MasterRequest, SamplingEndMsg2MasterResponse, PartitioningEndMsg2MasterRequest, PartitioningEndMsg2MasterResponse}
 
 object MasterServer{
   var numFinishGetSamples = 0
@@ -19,6 +20,7 @@ class MasterServer(executionContext: ExecutionContext, val numClient: Int, val P
   private val clientLatch: CountDownLatch = new CountDownLatch(numClient)
   private val sortLatch: CountDownLatch = new CountDownLatch(numClient)
   private val sampleLatch: CountDownLatch = new CountDownLatch(numClient)
+  private val partitionLatch: CountDownLatch = new CountDownLatch(numClient)
   private val workerIPList : ListBuffer[String] = ListBuffer[String]()
   def start() = {
     server = ServerBuilder.forPort(Port).addService(GeneralnetGrpc.bindService(new GeneralnetImpl, executionContext)).build.start
@@ -95,6 +97,14 @@ class MasterServer(executionContext: ExecutionContext, val numClient: Int, val P
       }
       val _rangeSequence = rangeEachMachine.toList.flatten{case (a,b)=>List(a,b)}
       val response = SamplingEndMsg2MasterResponse(totalSamples = _rangeSequence)
+      Future.successful(response)
+    }
+
+    override def partitioningEndMsg2Master(request: PartitioningEndMsg2MasterRequest): Future[PartitioningEndMsg2MasterResponse] = {
+      logger.info("Partitioning Finished from Worker: " + request.workerID)
+      partitionLatch.countDown()
+      partitionLatch.await()
+      val response = PartitioningEndMsg2MasterResponse(startNext = 1)
       Future.successful(response)
     }
   }

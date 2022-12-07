@@ -31,9 +31,10 @@ object worker {
 
       client.startSampling()
       client.samplingEndMsg2Master()
-      /*
+
       client.startPartitioning()
-      client.partitioningEndMsg2Master()*/
+      client.partitioningEndMsg2Master()
+      println("Let's start shuffling")
       /*Start Shuffling*/
 
     }
