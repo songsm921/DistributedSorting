@@ -34,6 +34,12 @@ object worker {
       client.samplingEndMsg2Master()
 
       client.startPartitioning(inputDirectoryList(0))
+      val inputabsolute0 = inputDirectoryList(0) + "toMachine.0"
+      val inputabsolute1 = inputDirectoryList(0) + "toMachine.1"
+      val inputabsolute2 = inputDirectoryList(0) + "toMachine.2"
+      println(new File(inputabsolute0).length())
+      println(new File(inputabsolute1).length())
+      println(new File(inputabsolute2).length())
       client.partitioningEndMsg2Master()
       println("Let's start shuffling")
       /*Start Shuffling*/
