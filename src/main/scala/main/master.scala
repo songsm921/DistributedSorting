@@ -14,5 +14,6 @@ object master {
     server.start()
     server.printEndpoint()
     server.blockUntilShutdown()
+    server.stop()
   }
 }

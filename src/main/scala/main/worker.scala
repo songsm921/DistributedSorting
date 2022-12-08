@@ -92,11 +92,21 @@ object worker {
       println("End of Shuffling")
       utils.util.copyOwnData(client.myWorkerNum,inputDirectoryList(0)+"toMachine."+ client.myWorkerNum.toString,outputPath)
       /* Merge Sort Phase Implement */ // 12/08 04:34 AM
+      client.startMergeSort()
+      val status = client.mergeSortEndMsg2Master()
+      if(status == 1){
+        util.deleteTmpFiles(inputDirectoryList(0),outputPath)
+        client.taskDoneMsg2Master()
+      }
+      else{
+        println("Merge Sort Fail")
+      }
     }
     catch {
       case e: Exception => println("Exception: " + e)
     }
     finally {
+      println("Worker Terminated")
       client.shutdown()
     }
   }

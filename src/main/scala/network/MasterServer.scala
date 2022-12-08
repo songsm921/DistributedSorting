@@ -9,7 +9,8 @@ import utils.util.getMyIpAddress
 import scala.collection.mutable.ListBuffer
 import generalnet.generalNet.{Connect2ServerRequest, Connect2ServerResponse,SortEndMsg2MasterRequest,SortEndMsg2MasterResponse, GeneralnetGrpc,
   SamplingEndMsg2MasterRequest, SamplingEndMsg2MasterResponse, PartitioningEndMsg2MasterRequest, PartitioningEndMsg2MasterResponse,
-  StartShufflingMsg2MasterRequest,StartShufflingMsg2MasterResponse}
+  StartShufflingMsg2MasterRequest,StartShufflingMsg2MasterResponse,MergeSortEndMsg2MasterRequest,MergeSortEndMsg2MasterResponse,
+  TaskDoneMsg2MasterRequest,TaskDoneMsg2MasterResponse}
 
 object MasterServer{
   var numFinishGetSamples = 0
@@ -24,6 +25,8 @@ class MasterServer(executionContext: ExecutionContext, val numClient: Int, val P
   private val sampleLatch: CountDownLatch = new CountDownLatch(numClient)
   private val partitionLatch: CountDownLatch = new CountDownLatch(numClient)
   private val shuffleLatch: ListBuffer[CountDownLatch] =  new ListBuffer[CountDownLatch]()
+  private val mergeLatch: CountDownLatch = new CountDownLatch(numClient)
+  private val taskLatch: CountDownLatch = new CountDownLatch(numClient)
   private val workerIPList : ListBuffer[String] = ListBuffer[String]()
   def start() = {
     server = ServerBuilder.forPort(Port).addService(GeneralnetGrpc.bindService(new GeneralnetImpl, executionContext)).build.start
@@ -119,6 +122,23 @@ class MasterServer(executionContext: ExecutionContext, val numClient: Int, val P
       shuffleLatch(request.workerID).countDown()
       shuffleLatch(request.workerID).await()
       val response = StartShufflingMsg2MasterResponse(nextServerWorkerID = MasterServer.nextShuffleServerID)
+      Future.successful(response)
+    }
+
+    override def mergeSortEndMsg2Master(request: MergeSortEndMsg2MasterRequest): Future[MergeSortEndMsg2MasterResponse] = {
+      logger.info("Merge Sort Finished from Worker: " + request.workerID)
+      mergeLatch.countDown()
+      mergeLatch.await()
+      val response = MergeSortEndMsg2MasterResponse(status = 1)
+      Future.successful(response)
+    }
+
+    override def taskDoneMsg2Master(request: TaskDoneMsg2MasterRequest): Future[TaskDoneMsg2MasterResponse] = {
+      logger.info("Task Done from Worker: " + request.workerID)
+      taskLatch.countDown()
+      taskLatch.await()
+      val response = TaskDoneMsg2MasterResponse(status = 1)
+      server.shutdown()
       Future.successful(response)
     }
   }

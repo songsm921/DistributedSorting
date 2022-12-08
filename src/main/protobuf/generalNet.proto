@@ -8,6 +8,8 @@ service Generalnet {
   rpc samplingEndMsg2Master (SamplingEndMsg2MasterRequest) returns (SamplingEndMsg2MasterResponse) {}
   rpc partitioningEndMsg2Master (PartitioningEndMsg2MasterRequest) returns (PartitioningEndMsg2MasterResponse) {}
   rpc startShufflingMsg2Master (StartShufflingMsg2MasterRequest) returns (StartShufflingMsg2MasterResponse) {}
+  rpc mergeSortEndMsg2Master (MergeSortEndMsg2MasterRequest) returns (MergeSortEndMsg2MasterResponse) {}
+  rpc taskDoneMsg2Master (TaskDoneMsg2MasterRequest) returns (TaskDoneMsg2MasterResponse) {}
 }
 
 message Connect2ServerRequest {
@@ -51,4 +53,20 @@ message StartShufflingMsg2MasterRequest {
 
 message StartShufflingMsg2MasterResponse {
   int32 nextServerWorkerID  = 1;
+}
+
+message MergeSortEndMsg2MasterRequest {
+  int32 workerID = 1;
+}
+
+message MergeSortEndMsg2MasterResponse {
+  int32 status = 1;
+}
+
+message TaskDoneMsg2MasterRequest {
+  int32 workerID = 1;
+}
+
+message TaskDoneMsg2MasterResponse {
+  int32 status = 1;
 }

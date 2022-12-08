@@ -14,9 +14,10 @@ import scala.concurrent.{Future, Promise}
 import utils.{util, Phase, workerPhase}
 import generalnet.generalNet.{GeneralnetGrpc,Connect2ServerRequest,Connect2ServerResponse,SortEndMsg2MasterRequest,SortEndMsg2MasterResponse,
   SamplingEndMsg2MasterRequest, SamplingEndMsg2MasterResponse, PartitioningEndMsg2MasterRequest, PartitioningEndMsg2MasterResponse,
-  StartShufflingMsg2MasterRequest,StartShufflingMsg2MasterResponse}
+  StartShufflingMsg2MasterRequest,StartShufflingMsg2MasterResponse,MergeSortEndMsg2MasterRequest,MergeSortEndMsg2MasterResponse,
+  TaskDoneMsg2MasterRequest,TaskDoneMsg2MasterResponse}
 import shuffling.shuffling.{ShufflingGrpc,ShuffleRequest,ShuffleResponse,ShutdownWorkerServerRequest,ShutdownWorkerServerResponse}
-import module.{sort,sample,partition}
+import module.{sort,sample,partition,merge}
 
 class workerClient(host: String, port: Int, outputAbsoluteDir : String) extends Logging {
   val channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().asInstanceOf[ManagedChannelBuilder[_]].build
@@ -139,6 +140,38 @@ class workerClient(host: String, port: Int, outputAbsoluteDir : String) extends 
         case e: StatusRuntimeException =>
           logger.warn(s"RPC failed: ${e.getStatus}")
           -1
+      }
+  }
+  def startMergeSort(): Unit = {
+    val mergesortInstance = new merge()
+    mergesortInstance.mergeSort(outputAbsoluteDir, totalWorkerNum,myWorkerNum)
+  }
+  def mergeSortEndMsg2Master(): Int = {
+    val request = MergeSortEndMsg2MasterRequest(workerID = myWorkerNum)
+    try{
+      val response = stub.mergeSortEndMsg2Master(request)
+      logger.info("mergeSortEndMsg2Master response: " + response)
+      response.status
+    }
+    catch
+      {
+        case e: StatusRuntimeException =>
+          logger.warn(s"RPC failed: ${e.getStatus}")
+          return -1
+      }
+  }
+  def taskDoneMsg2Master(): Int = {
+    val request = TaskDoneMsg2MasterRequest(workerID = myWorkerNum)
+    try{
+      val response = stub.taskDoneMsg2Master(request)
+      logger.info("taskDoneMsg2Master response: " + response)
+      response.status
+    }
+    catch
+      {
+        case e: StatusRuntimeException =>
+          logger.warn(s"RPC failed: ${e.getStatus}")
+          return -1
       }
   }
 

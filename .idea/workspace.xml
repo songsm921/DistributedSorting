@@ -6,7 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="87b62b27-47d7-40dd-91ef-b11f6e8c2b44" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/protobuf/generalNet.proto" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/protobuf/generalNet.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/scala/main/master.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/main/master.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/scala/main/worker.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/main/worker.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/scala/module/merge.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/module/merge.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/scala/network/MasterServer.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/network/MasterServer.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/scala/network/WorkerClinet.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/network/WorkerClinet.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/scala/utils/util.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/utils/util.scala" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +108,8 @@
       <workItem from="1670357852285" duration="115000" />
       <workItem from="1670357976908" duration="1096000" />
       <workItem from="1670384255439" duration="2523000" />
-      <workItem from="1670386936958" duration="36709000" />
+      <workItem from="1670386936958" duration="36753000" />
+      <workItem from="1670478741433" duration="3275000" />
     </task>
     <servers />
   </component>

@@ -62,6 +62,13 @@ object util {
       close
     }
   }
+
+  def deleteTmpFiles(inputPath: String, outputPath: String) = {
+    val inputDir = new File(inputPath)
+    val outputDir = new File(outputPath)
+    inputDir.listFiles.filter(_.getName.startsWith("toMachine")).foreach(_.delete)
+    outputDir.listFiles.filter(_.getName.startsWith("fromMachine")).foreach(_.delete)
+  }
 }
 
 object Phase extends Enumeration {
