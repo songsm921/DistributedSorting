@@ -46,11 +46,11 @@ object util {
         isFinish = 0
       }
       if(isFinish == 0){
-        println("File : " + path + "completed " + destLines + " lines" + "/" + lines.length + "...")
+        println("File : " + path + " completed " + destLines + " lines" + "/" + lines.length + "...")
         (targetList,destLines + 1)
       }
       else{
-        println("File : " + path + "completed.")
+        println("File : " + path + " completed.")
         (targetList,-1)
       }
 

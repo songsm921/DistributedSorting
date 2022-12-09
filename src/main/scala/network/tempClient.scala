@@ -50,7 +50,6 @@ class tempClient(host: String, port: Int, outputAbsoluteDir : String, myWorkerNu
     val request = ShutdownWorkerServerRequest(workerID = myWorkerNum)
     try{
       val response = stub.shutdownWorkerServer(request)
-      logger.info("ShutdownWorkerServer response: " + response)
     }
     catch
     {

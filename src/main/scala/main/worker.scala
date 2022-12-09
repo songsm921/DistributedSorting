@@ -28,19 +28,16 @@ object worker {
       client.connect2Server()
       client.startSort()
       client.sortEndMsg2Master()
-
       client.startSampling()
       client.samplingEndMsg2Master()
-
       client.startPartitioning(inputDirectoryList(0))
       client.partitioningEndMsg2Master()
-
       println("All workers enter SHUFFLE Phase")
       /*Start Shuffling*/
       for(i <- 0 until client.totalWorkerNum){
         val serverWorkerID = client.startShufflingMsg2Master(i)
         if(i == client.myWorkerNum){
-          println(client.myWorkerNum + "is server")
+          println("Worker "+ client.myWorkerNum + " is server")
           val workerserver = new WorkerServer(ExecutionContext.global,client.totalWorkerNum,workerPort+i,outputPath,client.myWorkerNum,inputDirectoryList(0))
           workerserver.start()
           var check = 1
@@ -80,11 +77,11 @@ object worker {
       }
       println("End of Shuffling")
       utils.util.copyOwnData(client.myWorkerNum,inputDirectoryList(0)+"toMachine."+ client.myWorkerNum.toString,outputPath)
-      println("Worker " + client.myWorkerNum + "starts Merge Phase")
+      println("Worker " + client.myWorkerNum + " starts Merge Phase")
       client.startMergeSort()
       val status = client.mergeSortEndMsg2Master()
       if(status == 1){
-        println("Worker " + client.myWorkerNum + "deletes temporary files....")
+        println("Worker " + client.myWorkerNum + " deletes temporary files....")
         util.deleteTmpFiles(inputDirectoryList(0),outputPath)
         client.taskDoneMsg2Master()
       }

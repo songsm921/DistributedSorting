@@ -24,8 +24,6 @@ class WorkerServer(executionContext: ExecutionContext, val numClient: Int, val P
     for(i <- 0 until numClient){
       printInstance.append(new PrintWriter(outputPath + "fromMachine." + i))
     }
-    logger.info("Server numClient: " + self.numClient)
-    logger.info("Server started, listening on " + Port)
     sys.addShutdownHook {
       System.err.println("*** shutting down gRPC server since JVM is shutting down")
       self.stop()

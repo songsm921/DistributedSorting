@@ -44,10 +44,6 @@ class workerClient(host: String, port: Int, outputAbsoluteDir : String) extends 
       totalWorkerNum = response.workerNum
       myWorkerNum = response.workerID
       workersIPList.appendAll(response.workerIPList)
-      for (ip <- workersIPList) {
-        logger.info("Worker IP: " + ip)
-      }
-      logger.info("connect2Server response: " + response.workerID + " " + response.workerNum)
     }
     catch
       {
@@ -67,7 +63,6 @@ class workerClient(host: String, port: Int, outputAbsoluteDir : String) extends 
     val request = SortEndMsg2MasterRequest(workerID = myWorkerNum)
     try{
       val response = stub.sortEndMsg2Master(request)
-      logger.info("sortEndMsg2Master response: " + response)
     }
     catch
       {
@@ -87,16 +82,9 @@ class workerClient(host: String, port: Int, outputAbsoluteDir : String) extends 
     val request = SamplingEndMsg2MasterRequest(workerID = myWorkerNum, samples = samples2Master)
     try {
       val response = stub.samplingEndMsg2Master(request)
-      logger.info("Sample Range is coming! " + myWorkerNum)
       partitionRanges = partitionRanges.concat(response.totalSamples.toArray)
-      for (i <- 0 to response.totalSamples.toList.length - 1) {
-        logger.info("PartitionRange[" + i + "] : " + partitionRanges(i))
-      }
       myPartitionRange(0) = partitionRanges(2 * myWorkerNum)
       myPartitionRange(1) = partitionRanges(2 * myWorkerNum + 1)
-      logger.info("My Partition Range starts from: " + myPartitionRange(0))
-      logger.info("My Partition Range ends to: " + myPartitionRange(1))
-      /* Save total Samples */
     }
     catch {
       case e: StatusRuntimeException =>
@@ -118,7 +106,6 @@ class workerClient(host: String, port: Int, outputAbsoluteDir : String) extends 
     val request = PartitioningEndMsg2MasterRequest(workerID = myWorkerNum)
     try{
       val response = stub.partitioningEndMsg2Master(request)
-      logger.info("partitioningEndMsg2Master response: " + response)
     }
     catch
       {
@@ -132,7 +119,6 @@ class workerClient(host: String, port: Int, outputAbsoluteDir : String) extends 
     val request = StartShufflingMsg2MasterRequest(workerID = i)
     try{
       val response = stub.startShufflingMsg2Master(request)
-      logger.info("startShufflingMsg2Master response: " + response)
       response.nextServerWorkerID
     }
     catch
@@ -150,7 +136,6 @@ class workerClient(host: String, port: Int, outputAbsoluteDir : String) extends 
     val request = MergeSortEndMsg2MasterRequest(workerID = myWorkerNum)
     try{
       val response = stub.mergeSortEndMsg2Master(request)
-      logger.info("mergeSortEndMsg2Master response: " + response)
       response.status
     }
     catch
@@ -164,7 +149,6 @@ class workerClient(host: String, port: Int, outputAbsoluteDir : String) extends 
     val request = TaskDoneMsg2MasterRequest(workerID = myWorkerNum)
     try{
       val response = stub.taskDoneMsg2Master(request)
-      logger.info("taskDoneMsg2Master response: " + response)
       response.status
     }
     catch

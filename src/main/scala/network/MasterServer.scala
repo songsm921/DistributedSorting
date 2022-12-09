@@ -59,7 +59,7 @@ class MasterServer(executionContext: ExecutionContext, val numClient: Int, val P
     override def connect2Server(request: Connect2ServerRequest): Future[Connect2ServerResponse] = {
       val _workerID_ = workerIPList.length
       workerIPList.append(request.workerIpAddress)
-      logger.info("Worker IP: " + request.workerIpAddress + "added")
+      println(request.workerIpAddress)
       clientLatch.countDown()
       clientLatch.await()
       val response = Connect2ServerResponse(workerID = _workerID_,workerNum = numClient,workerIPList = workerIPList.toList)
@@ -67,7 +67,6 @@ class MasterServer(executionContext: ExecutionContext, val numClient: Int, val P
     }
 
     override def sortEndMsg2Master(request: SortEndMsg2MasterRequest): Future[SortEndMsg2MasterResponse] = {
-      logger.info("Sorted Finished from Worker: " + request.workerID)
       sortLatch.countDown()
       sortLatch.await()
       val response = SortEndMsg2MasterResponse(startNext = 1)
@@ -75,7 +74,6 @@ class MasterServer(executionContext: ExecutionContext, val numClient: Int, val P
     }
 
     override def samplingEndMsg2Master(request: SamplingEndMsg2MasterRequest): Future[SamplingEndMsg2MasterResponse] = {
-      logger.info("Sampling Finished from Worker: " + request.workerID)
       while(MasterServer.numFinishGetSamples < numClient){
        if(MasterServer.numFinishGetSamples == request.workerID){
          MasterServer.totalSampleList.appendAll(request.samples)
@@ -111,14 +109,12 @@ class MasterServer(executionContext: ExecutionContext, val numClient: Int, val P
     }
 
     override def partitioningEndMsg2Master(request: PartitioningEndMsg2MasterRequest): Future[PartitioningEndMsg2MasterResponse] = {
-      logger.info("Partitioning Finished from Worker: " + request.workerID)
       partitionLatch.countDown()
       partitionLatch.await()
       val response = PartitioningEndMsg2MasterResponse(startNext = 1)
       Future.successful(response)
     }
     override def startShufflingMsg2Master(request: StartShufflingMsg2MasterRequest): Future[StartShufflingMsg2MasterResponse] = {
-      logger.info("Start Shuffling from Worker: " + request.workerID)
       shuffleLatch(request.workerID).countDown()
       shuffleLatch(request.workerID).await()
       val response = StartShufflingMsg2MasterResponse(nextServerWorkerID = MasterServer.nextShuffleServerID)
@@ -126,7 +122,6 @@ class MasterServer(executionContext: ExecutionContext, val numClient: Int, val P
     }
 
     override def mergeSortEndMsg2Master(request: MergeSortEndMsg2MasterRequest): Future[MergeSortEndMsg2MasterResponse] = {
-      logger.info("Merge Sort Finished from Worker: " + request.workerID)
       mergeLatch.countDown()
       mergeLatch.await()
       val response = MergeSortEndMsg2MasterResponse(status = 1)
@@ -134,7 +129,6 @@ class MasterServer(executionContext: ExecutionContext, val numClient: Int, val P
     }
 
     override def taskDoneMsg2Master(request: TaskDoneMsg2MasterRequest): Future[TaskDoneMsg2MasterResponse] = {
-      logger.info("Task Done from Worker: " + request.workerID)
       taskLatch.countDown()
       taskLatch.await()
       val response = TaskDoneMsg2MasterResponse(status = 1)
