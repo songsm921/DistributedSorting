@@ -37,7 +37,6 @@ class tempClient(host: String, port: Int, outputAbsoluteDir : String, myWorkerNu
     val request = ShuffleRequest(datas = data.toList,myWorkerNum)
     try{
       val response = stub.shuffle(request)
-      logger.info("Shuffle response: " + response)
       return response.sendTerminate
     }
     catch

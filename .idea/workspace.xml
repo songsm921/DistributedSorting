@@ -6,13 +6,53 @@
   <component name="ChangeListManager">
     <list default="true" id="87b62b27-47d7-40dd-91ef-b11f6e8c2b44" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/protobuf/generalNet.proto" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/protobuf/generalNet.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/main/master.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/main/master.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/config-classes/$947b7d0a45cd979be1e3$.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/config-classes/$947b7d0a45cd979be1e3.cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/target/config-classes/$947b7d0a45cd979be1e3.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/scala/main/worker.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/main/worker.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/module/merge.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/module/merge.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/network/MasterServer.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/network/MasterServer.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/network/WorkerClinet.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/network/WorkerClinet.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/scala/network/WorkerServer.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/network/WorkerServer.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/scala/network/tempClient.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/network/tempClient.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/scala/utils/util.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/utils/util.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.13/classes/generalnet/generalNet/GeneralNetProto$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.13/classes/generalnet/generalNet/GeneralNetProto$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.13/classes/generalnet/generalNet/GeneralnetGrpc$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.13/classes/generalnet/generalNet/GeneralnetGrpc$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.13/classes/generalnet/generalNet/GeneralnetGrpc$Generalnet$$anon$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.13/classes/generalnet/generalNet/GeneralnetGrpc$Generalnet$$anon$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.13/classes/generalnet/generalNet/GeneralnetGrpc$Generalnet$$anon$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.13/classes/generalnet/generalNet/GeneralnetGrpc$Generalnet$$anon$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.13/classes/generalnet/generalNet/GeneralnetGrpc$Generalnet$$anon$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.13/classes/generalnet/generalNet/GeneralnetGrpc$Generalnet$$anon$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.13/classes/generalnet/generalNet/GeneralnetGrpc$Generalnet$$anon$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.13/classes/generalnet/generalNet/GeneralnetGrpc$Generalnet$$anon$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.13/classes/generalnet/generalNet/GeneralnetGrpc$Generalnet$$anon$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.13/classes/generalnet/generalNet/GeneralnetGrpc$Generalnet$$anon$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.13/classes/generalnet/generalNet/GeneralnetGrpc$Generalnet$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.13/classes/generalnet/generalNet/GeneralnetGrpc$Generalnet$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.13/classes/generalnet/generalNet/GeneralnetGrpc$Generalnet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.13/classes/generalnet/generalNet/GeneralnetGrpc$Generalnet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.13/classes/generalnet/generalNet/GeneralnetGrpc$GeneralnetBlockingClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.13/classes/generalnet/generalNet/GeneralnetGrpc$GeneralnetBlockingClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.13/classes/generalnet/generalNet/GeneralnetGrpc$GeneralnetBlockingStub$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.13/classes/generalnet/generalNet/GeneralnetGrpc$GeneralnetBlockingStub$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.13/classes/generalnet/generalNet/GeneralnetGrpc$GeneralnetBlockingStub.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.13/classes/generalnet/generalNet/GeneralnetGrpc$GeneralnetBlockingStub.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.13/classes/generalnet/generalNet/GeneralnetGrpc$GeneralnetStub$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.13/classes/generalnet/generalNet/GeneralnetGrpc$GeneralnetStub$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.13/classes/generalnet/generalNet/GeneralnetGrpc$GeneralnetStub.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.13/classes/generalnet/generalNet/GeneralnetGrpc$GeneralnetStub.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.13/classes/generalnet/generalNet/GeneralnetGrpc.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.13/classes/generalnet/generalNet/GeneralnetGrpc.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.13/classes/main/master$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.13/classes/main/master$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.13/classes/main/worker$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.13/classes/main/worker$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.13/classes/module/merge$.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.13/classes/module/merge.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.13/classes/module/merge.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.13/classes/module/partition.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.13/classes/module/partition.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.13/classes/network/MasterServer$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.13/classes/network/MasterServer$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.13/classes/network/MasterServer$GeneralnetImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.13/classes/network/MasterServer$GeneralnetImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.13/classes/network/MasterServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.13/classes/network/MasterServer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.13/classes/network/WorkerServer$ShufflingImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.13/classes/network/WorkerServer$ShufflingImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.13/classes/network/workerClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.13/classes/network/workerClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.13/classes/utils/Phase$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.13/classes/utils/Phase$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.13/classes/utils/util$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.13/classes/utils/util$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.13/classes/utils/util.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.13/classes/utils/util.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.13/classes/utils/workerPhase$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.13/classes/utils/workerPhase$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.13/src_managed/main/scalapb/generalnet/generalNet/GeneralNetProto.scala" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.13/src_managed/main/scalapb/generalnet/generalNet/GeneralNetProto.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.13/src_managed/main/scalapb/generalnet/generalNet/GeneralnetGrpc.scala" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.13/src_managed/main/scalapb/generalnet/generalNet/GeneralnetGrpc.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.13/zinc/inc_compile_2.13.zip" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.13/zinc/inc_compile_2.13.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/streams/_global/_global/artifactResolver/_global/streams/out" beforeDir="false" afterPath="$PROJECT_DIR$/target/streams/_global/_global/artifactResolver/_global/streams/out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/streams/compile/_global/_global/compileOutputs/previous" beforeDir="false" afterPath="$PROJECT_DIR$/target/streams/compile/_global/_global/compileOutputs/previous" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/streams/compile/compile/_global/streams/out" beforeDir="false" afterPath="$PROJECT_DIR$/target/streams/compile/compile/_global/streams/out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/streams/compile/compileIncremental/_global/streams/out" beforeDir="false" afterPath="$PROJECT_DIR$/target/streams/compile/compileIncremental/_global/streams/out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/streams/compile/incOptions/_global/streams/out" beforeDir="false" afterPath="$PROJECT_DIR$/target/streams/compile/incOptions/_global/streams/out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/streams/compile/protocGenerate/_global/streams/protobuf_2.13/input" beforeDir="false" afterPath="$PROJECT_DIR$/target/streams/compile/protocGenerate/_global/streams/protobuf_2.13/input" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/streams/compile/protocGenerate/_global/streams/protobuf_2.13/output" beforeDir="false" afterPath="$PROJECT_DIR$/target/streams/compile/protocGenerate/_global/streams/protobuf_2.13/output" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/streams/compile/protocRunProtoc/_global/streams/out" beforeDir="false" afterPath="$PROJECT_DIR$/target/streams/compile/protocRunProtoc/_global/streams/out" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,6 +115,7 @@
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
@@ -109,7 +150,8 @@
       <workItem from="1670357976908" duration="1096000" />
       <workItem from="1670384255439" duration="2523000" />
       <workItem from="1670386936958" duration="36753000" />
-      <workItem from="1670478741433" duration="3275000" />
+      <workItem from="1670478741433" duration="4534000" />
+      <workItem from="1670558461861" duration="1504000" />
     </task>
     <servers />
   </component>

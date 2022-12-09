@@ -6,9 +6,6 @@ import scala.io.Source
 class merge{
   //Implement K-way Merge sort
   def mergeSort(outputPath : String, totalWorkerNum : Int, workerID : Int) = {
-    val dir = new File(outputPath)
-    val files = dir.listFiles.filter(_.isFile).toList
-    val sourceAbsolutePath = files.map {x => x.toString}
     new PrintWriter(outputPath + "Result." + workerID.toString) {
       for(i <- 0 until totalWorkerNum){
         val lines = Source.fromFile(outputPath + "fromMachine." + i.toString).getLines()

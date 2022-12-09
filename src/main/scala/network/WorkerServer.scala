@@ -34,9 +34,6 @@ class WorkerServer(executionContext: ExecutionContext, val numClient: Int, val P
   }
   def stop() = {
     if (server != null) {
-      /*for(i<-0 until numClient){
-        printInstance(i).close()
-      }*/
       server.shutdown()
     }
   }
@@ -51,11 +48,9 @@ class WorkerServer(executionContext: ExecutionContext, val numClient: Int, val P
       for (ele <- request.datas){
         toFile.append(ele)
       }
-      println(toFile.length)
       val workerID = request.fromWorkerID
       println(workerID)
       for(line<- toFile){
-        println(line)
         printInstance(workerID).write(line + "\r\n")
       }
       val response = ShuffleResponse(sendTerminate = 0)
