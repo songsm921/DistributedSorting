@@ -100,9 +100,6 @@ class MasterServer(executionContext: ExecutionContext, val numClient: Int, val P
           rangeEachMachine.append((rangeEachMachine(i-2)._2,sortedSampleList((sortedSampleList.length/numClient) * i - 1)))
         }
       }
-      for(range <- rangeEachMachine){
-        println(range._1 + " " + range._2)
-      }
       val _rangeSequence = rangeEachMachine.toList.flatten{case (a,b)=>List(a,b)}
       val response = SamplingEndMsg2MasterResponse(totalSamples = _rangeSequence)
       Future.successful(response)

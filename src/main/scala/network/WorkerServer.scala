@@ -47,7 +47,6 @@ class WorkerServer(executionContext: ExecutionContext, val numClient: Int, val P
         toFile.append(ele)
       }
       val workerID = request.fromWorkerID
-      println(workerID)
       for(line<- toFile){
         printInstance(workerID).write(line + "\r\n")
       }

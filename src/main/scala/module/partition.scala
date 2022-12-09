@@ -20,7 +20,6 @@ class partition{
   }
 
   def partitionEachLine(path: String, rangeList: Array[String]) = {
-    println("Access in " + path)
     val lines = Source.fromFile(path).getLines().map(_.splitAt(10)).toList
     val partitionedLines: ListBuffer[(Int, String)] = ListBuffer()
     val _rangeList_ = rangeList
